@@ -111,8 +111,9 @@ app.get('/cloudanturl', function(req, res){
 	res.json({"cloudantURL" : cloudantURL + "/"});
 });
 
-app.listen(ibmconfig.getPort());
-console.log('Server started at port: '+ibmconfig.getPort());
+http.createServer(app).listen(app.get('port'), '0.0.0.0', function() {
+    console.log('Express server listening on port ' + app.get('port'));
+});
 
 
 
