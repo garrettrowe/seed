@@ -112,7 +112,7 @@ app.get('/', function(req, res){
 app.get('/cloudanturl', function(req, res){
 	res.json({"cloudantURL" : cloudantURL + "/"});
 });
-app.use(contextRoot, appContext);
+
 app.listen(ibmconfig.getPort());
 console.log('Server started at port: '+ibmconfig.getPort());
 
