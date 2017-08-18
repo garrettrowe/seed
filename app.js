@@ -75,18 +75,11 @@ function initDBConnection() {
     var icdb;
     cloudant = require('cloudant')(dbCredentials.url);
 
-    // check if DB exists if not create
-    cloudant.db.create(dbCredentials.dbName, function(err, res) {
-        if (err) {
-            console.log('Could not create new db: ' + dbCredentials.dbName + ', it might already exist.');
-        }
-    });
-
-    db = cloudant.use(dbCredentials.dbName);
-    db.list(function(err, body) {
+    //db = cloudant.use(dbCredentials.dbName);
+    cloudant.db.list(function(err, body) {
 	  body.forEach(function(dbc) {
 		cloudantDB = dbc;
-		icdb = db.use(dbc);
+		icdb = cloudant.db.use(dbc);
 		icdb.follow({since: "now"}, function(error, change) {
 			if (error){
 			return console.log('Error following database: ', error);
