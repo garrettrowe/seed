@@ -2,96 +2,92 @@
 
 // app.js
 
-var cloudantUser = '';
-var cloudantPass = '';
-var cloudantURL = '';
-var cloudantDB = '';
-var appId = '';
-var appR = '';
-var appS = '';
-
 var express = require('express'),
-    bodyparser = require('body-parser'),
-    ibmbluemix = require('ibmbluemix'),
-    ibmpush = require('ibmpush'),
-	Cloudant = require('cloudant');
-	
-console.log("Getting deployed environment variables");
-
-if (process.env.VCAP_SERVICES != null) {	
-	try{
-		obj = JSON.parse(process.env.VCAP_SERVICES);
-			
-		cloudantUser = obj.cloudantNoSQLDB[0].credentials.username;
-		cloudantPass = obj.cloudantNoSQLDB[0].credentials.password;	
-		cloudantURL = obj.cloudantNoSQLDB[0].credentials.url;	
-		var aurl = obj.MAS[0].credentials.admin_url;	
-		appId = aurl.substring(aurl.lastIndexOf("/")+1, aurl.length);	
-		
-		obj = JSON.parse(process.env.VCAP_APPLICATION);
-		appR = "http://" + obj.application_uris[0];
-		
-	}
-	catch(fail){
-		console.log("Failed to parse required info from VCAP_Services - look out, we're about to fail!")
-	}
-	console.log("Cloudant Logon: " + cloudantUser + " / " + cloudantPass);
-	console.log("App ID: " + appId);
-	console.log("App Route: " + appR);
-}
-if (process.env.AppS != null) {	
-	try{
-		appS = process.env.AppS;
-	}
-	catch(fail){
-		console.log("Failed to parse required info from User-Provided - look out, we're about to fail!")
-	}
-	console.log("App S: " + appS);
-}
-else{
-	console.log("Set the application secret user environment variable: AppS")
-}
-
-var appConfig = {
-    applicationId: appId,
-    applicationRoute: appR,
-	applicationSecret: appS
-};
-
-ibmbluemix.initialize(appConfig);
+    routes = require('./routes'),
+    user = require('./routes/user'),
+    http = require('http'),
+    path = require('path'),
+    fs = require('fs');
 
 var app = express();
-var appContext=express.Router();
-var logger = ibmbluemix.getLogger();
-var ibmconfig = ibmbluemix.getConfig();
-var contextRoot = ibmconfig.getContextRoot();
-var push = ibmpush.initializeService();
-console.log("contextRoot: " + contextRoot);
 
-app.use(function(req, res, next) {
-	req.logger = logger;
-	next();
-});
+var db;
 
-Cloudant({account:cloudantUser, password:cloudantPass}, function(er, cloudant) {
-	  if (er){
-		return console.log('Error connecting to Cloudant account %s: %s', cloudantUser, er.message);
-	  }
-	console.log('Connected to Cloudant');
-	cloudant.ping(function(er, reply) {
-	  if (er){
-		return console.log('Failed to ping Cloudant');
-	  }
-	  console.log('Server version = %s', reply.version);
-	  console.log('Logged in as %s and my roles are %j', reply.userCtx.name, reply.userCtx.roles);
-	});
+var cloudant;
 
-	var icdb = undefined;
-	
-	cloudant.db.list(function(err, body) {
-	  body.forEach(function(db) {
-		cloudantDB = db;
-		icdb = cloudant.db.use(db);
+var dbCredentials = {
+    dbName: 'my_sample_db'
+};
+
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
+var logger = require('morgan');
+var errorHandler = require('errorhandler');
+var multipart = require('connect-multiparty')
+var multipartMiddleware = multipart();
+
+// all environments
+app.set('port', process.env.PORT || 3000);
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+app.engine('html', require('ejs').renderFile);
+app.use(logger('dev'));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/style', express.static(path.join(__dirname, '/views/style')));
+
+// development only
+if ('development' == app.get('env')) {
+    app.use(errorHandler());
+}
+
+function getDBCredentialsUrl(jsonData) {
+    var vcapServices = JSON.parse(jsonData);
+    // Pattern match to find the first instance of a Cloudant service in
+    // VCAP_SERVICES. If you know your service key, you can access the
+    // service credentials directly by using the vcapServices object.
+    for (var vcapService in vcapServices) {
+        if (vcapService.match(/cloudant/i)) {
+            return vcapServices[vcapService][0].credentials.url;
+        }
+    }
+}
+
+function initDBConnection() {
+    //When running on Bluemix, this variable will be set to a json object
+    //containing all the service credentials of all the bound services
+    if (process.env.VCAP_SERVICES) {
+        dbCredentials.url = getDBCredentialsUrl(process.env.VCAP_SERVICES);
+    } else { //When running locally, the VCAP_SERVICES will not be set
+
+        // When running this app locally you can get your Cloudant credentials
+        // from Bluemix (VCAP_SERVICES in "cf env" output or the Environment
+        // Variables section for an app in the Bluemix console dashboard).
+        // Once you have the credentials, paste them into a file called vcap-local.json.
+        // Alternately you could point to a local database here instead of a
+        // Bluemix service.
+        // url will be in this format: https://username:password@xxxxxxxxx-bluemix.cloudant.com
+        dbCredentials.url = getDBCredentialsUrl(fs.readFileSync("vcap-local.json", "utf-8"));
+    }
+
+    cloudant = require('cloudant')(dbCredentials.url);
+
+    // check if DB exists if not create
+    cloudant.db.create(dbCredentials.dbName, function(err, res) {
+        if (err) {
+            console.log('Could not create new db: ' + dbCredentials.dbName + ', it might already exist.');
+        }
+    });
+
+    db = cloudant.use(dbCredentials.dbName);
+    db.list(function(err, body) {
+	  body.forEach(function(dbc) {
+		cloudantDB = dbc;
+		icdb = db.use(dbc);
 		icdb.follow({since: "now"}, function(error, change) {
 			if (error){
 			return console.log('Error following database: ', error);
@@ -99,18 +95,21 @@ Cloudant({account:cloudantUser, password:cloudantPass}, function(er, cloudant) {
 		  else{
 			console.log("Change Occurred, sending Broadcast Push");
 			var message = {alert : "New data is available", url : "https://www.mybluemix.net"};
-			
-			push.sendBroadcastNotification(message,null).then(function (response) {
-				console.log("Push Broadcast Sent", response);
-			}, function(err) {
-				console.log("Failed to send Push");
-				console.log(err);
-			});
 		  }
 		});
 	  });
-	});
 });
+}
+
+initDBConnection();
+
+app.get('/', routes.index);
+
+
+
+	var icdb;
+	
+
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({
