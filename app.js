@@ -38,7 +38,6 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/style', express.static(path.join(__dirname, '/views/style')));
 
 // development only
 if ('development' == app.get('env')) {
@@ -73,7 +72,7 @@ function initDBConnection() {
         // url will be in this format: https://username:password@xxxxxxxxx-bluemix.cloudant.com
         dbCredentials.url = getDBCredentialsUrl(fs.readFileSync("vcap-local.json", "utf-8"));
     }
-
+    var icdb;
     cloudant = require('cloudant')(dbCredentials.url);
 
     // check if DB exists if not create
@@ -106,17 +105,6 @@ initDBConnection();
 app.get('/', routes.index);
 
 
-
-	var icdb;
-	
-
-
-app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({
-  extended: true
-}));
-
-app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res){
 	res.sendfile('public/index.html');
