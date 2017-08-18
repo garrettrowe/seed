@@ -104,8 +104,6 @@ initDBConnection();
 
 app.get('/', routes.index);
 
-
-
 app.get('/', function(req, res){
 	res.sendfile('public/index.html');
 });
