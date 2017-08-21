@@ -31,6 +31,7 @@
 	var FlexScrollView = famousflex.FlexScrollView;
 	var ListLayout = famousflex.layouts.ListLayout;
 	var SequentialLayout = famous.views.SequentialLayout;
+
 	var ContainerSurface = famous.surfaces.ContainerSurface;
 	var InputSurface = famous.surfaces.InputSurface;
 	var TextareaSurface = famous.surfaces.TextareaSurface;
@@ -59,6 +60,7 @@
     var tab = [];
 	var modal = undefined;
 	var modalTitle = undefined;
+	var modalRating = undefined;
 	var userInputTitle = undefined;
 	var userInputContent = undefined;
 	var submitState = new Modifier({});
@@ -476,7 +478,7 @@
 				if (typeof res.rows[0].doc[i] === "object"){
 					modalTitle.setContent("<h3>" + res.rows[0].doc[i].title.replace("*","<img src='./images/hq.png'>") + "</h3><hr width=92%>" );
 					modal.setContent("<div>" + res.rows[0].doc[i].content + "</div>");
-					modalRating.setContent("<div id='rating" + res.rows[0].doc[i]._id + "'></div><script></script>");
+					modalRating.setContent("<div id='rating" + i + "'></div><script>var mR = rating(document.querySelector('#rating" + i + "'), 0, 5, function(rating) { alert(rating); });</script>");
 				}
 			}); 
 		});
