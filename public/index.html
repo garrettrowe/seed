@@ -476,7 +476,7 @@
 				if (typeof res.rows[0].doc[i] === "object"){
 					modalTitle.setContent("<h3>" + res.rows[0].doc[i].title.replace("*","<img src='./images/hq.png'>") + "</h3><hr width=92%>" );
 					modal.setContent("<div>" + res.rows[0].doc[i].content + "</div>");
-					modalRating.setContent("<div id='rating" + i + "'></div><script>rating(document.querySelector('#rating" + i + "'), 0, 5, function(rating) { alert(rating); });</script>");
+					modalRating.setContent("<div id='rating" + i + "'></div><script>var mR = rating(document.querySelector('#rating" + i + "'), 0, 5, function(rating) { alert(rating); });</script>");
 				}
 			}); 
 		});
