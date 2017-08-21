@@ -14,7 +14,9 @@
 		<link rel="apple-touch-startup-image" href="images/splash.png">
 
 		<link rel="stylesheet" type="text/css" href="styles/app.css" />
+		<link rel="stylesheet" type="text/css" href="styles/rating.css" />
 		<script type="text/javascript" src="lib/c.js"></script>
+		<script type="text/javascript" src="lib/rating.js"></script>
     </head>
     <body>
 	<script defer="defer">
@@ -474,6 +476,7 @@
 				if (typeof res.rows[0].doc[i] === "object"){
 					modalTitle.setContent("<h3>" + res.rows[0].doc[i].title.replace("*","<img src='./images/hq.png'>") + "</h3><hr width=92%>" );
 					modal.setContent("<div>" + res.rows[0].doc[i].content + "</div>");
+					modalRating.setContent("<div id='rating" + i + "'></div><script>rating(document.querySelector('#rating" + i + "'), 0, 5, function(rating) { alert(rating); });</script>");
 				}
 			}); 
 		});
@@ -512,6 +515,7 @@
 			dataSource: [
 				_createTitle(),
 				_createSection(),
+				_createRating(),
 				 new Surface({})
 			],
 			autoPipeEvents: true,
@@ -551,6 +555,23 @@
 			}
 		});
 	  return modal;
+	}
+
+	function _createRating() {
+	    modalRating = new Surface({
+			size: [undefined, 60],
+			properties:{
+				backgroundColor:'#008abf',
+				color:'white',
+				textAlign: 'center',
+				zIndex: '51',
+			},
+		});
+		var renderNode = new RenderNode(new Modifier({
+			transform: Transform.infront
+		}));
+		renderNode.add(modalRating);
+		return renderNode;
 	}
 	
 	function openModal(e){
