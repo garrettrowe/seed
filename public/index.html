@@ -479,7 +479,7 @@
 				if (typeof res.rows[0].doc[i] === "object"){
 					modalTitle.setContent("<h3>" + res.rows[0].doc[i].title.replace("*","<img src='./images/hq.png'>") + "</h3><hr width=92%>" );
 					modal.setContent("<div>" + res.rows[0].doc[i].content + "</div>");
-					modalRating.setContent("<hr width=92%><div>THis is the rating</div>" );
+					modalRating.setContent("<hr width=92%><div id='rating" + i + "'></div><script>var mR = rating(document.querySelector('#rating" + i + "'), 0, 5, function(rating) { alert(rating); });<//script>" );
 				}
 			}); 
 		});
@@ -537,12 +537,12 @@
 			return [undefined, size[0]-140];
 		});
 
-		var grid = new HeaderFooterLayout({headerSize: 60,footerSize: 60}); 
+		var grid = new HeaderFooterLayout({headerSize: 55,footerSize: 55}); 
 
 		grid.header.add(_createTitle());
 		grid.content.add(modalscrollview.contentscroll);
 		grid.footer.add(_createRating());
-		
+
 		modalscrollview.add(grid);
 	}
 	function _createTitle(mcontent) {
