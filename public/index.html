@@ -52,7 +52,6 @@
 	var searchFields = ['questions.title', 'questions.content', 'documentation.title', 'documentation.content', 'user.title', 'user.content'];
 	var tabMapping = ['questions', 'documentation', 'user'];
 	var layout = new HeaderFooterLayout({headerSize: 50,footerSize: 50});
-	var modlayout = new HeaderFooterLayout({headerSize: 50,footerSize: 50});
 	
 	var search = undefined;
 	var tb = undefined;
@@ -538,12 +537,12 @@
 			return [undefined, size[0]-140];
 		});
 
-		var grid = new SequentialLayout({direction:1});	  
-		var views = [];
-		grid.sequenceFrom(views);
-		views.push(_createTitle());
-		views.push(sizeModifier).add(modalscrollview.contentscroll);
-		views.push(_createRating());
+		var grid = new HeaderFooterLayout({headerSize: 60,footerSize: 60}); 
+
+		grid.header.add(_createTitle());
+		grid.content.add(modalscrollview.contentscroll);
+		grid.footer.add(_createRating());
+		
 		modalscrollview.add(grid);
 	}
 	function _createTitle(mcontent) {
