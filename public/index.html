@@ -532,11 +532,17 @@
 			}
 		});
 
+		var sizeModifier = new Modifier();
+		sizeModifier.sizeFrom(function(){
+			var size = mastersurface.getSize();
+			return [undefined, size[0]-140];
+		});
+
 		var grid = new SequentialLayout({direction:1});	  
 		var views = [];
 		grid.sequenceFrom(views);
 		views.push(_createTitle());
-		views.push(modalscrollview.contentscroll);
+		views.push(sizeModifier).add(modalscrollview.contentscroll);
 		views.push(_createRating());
 		modalscrollview.add(grid);
 	}
