@@ -52,6 +52,8 @@
 	var searchFields = ['questions.title', 'questions.content', 'documentation.title', 'documentation.content', 'user.title', 'user.content'];
 	var tabMapping = ['questions', 'documentation', 'user'];
 	var layout = new HeaderFooterLayout({headerSize: 50,footerSize: 50});
+	var modlayout = new HeaderFooterLayout({headerSize: 50,footerSize: 50});
+	
 	var search = undefined;
 	var tb = undefined;
 	var rc = undefined;
@@ -515,9 +517,8 @@
 				spacing: 5
 			},
 			dataSource: [
-				_createTitle(),
 				_createSection(),
-				_createRating(),
+				
 				 new Surface({})
 			],
 			autoPipeEvents: true,
@@ -530,9 +531,17 @@
 				period: 1000        
 			}
 		});
-		modalscrollview.add(modalscrollview.contentscroll);
+
+		var grid = new SequentialLayout({direction:1});	  
+		var views = [];
+		grid.sequenceFrom(views);
+		views.push(_createTitle());
+		views.push(modalscrollview.contentscroll);
+		views.push(_createRating());
+\
+		modalscrollview.add(grid);
 	}
-	function _createTitle() {
+	function _createTitle(mcontent) {
 		modalTitle = new Surface({
 			size: [undefined, 60],
 			properties:{
@@ -542,11 +551,7 @@
 				zIndex: '51',
 			},
 		});
-		var renderNode = new RenderNode(new Modifier({
-			transform: Transform.infront
-		}));
-		renderNode.add(modalTitle);
-		return renderNode;
+		return modalTitle;
 	}
 	
 	function _createSection() {
@@ -559,7 +564,7 @@
 	  return modal;
 	}
 
-	function _createRating() {
+	function _createRating(mcontent) {
 	    modalRating = new Surface({
 			size: [undefined, 60],
 			properties:{
@@ -569,11 +574,7 @@
 				zIndex: '51',
 			},
 		});
-		var renderNode = new RenderNode(new Modifier({
-			transform: Transform.infront
-		}));
-		renderNode.add(modalRating);
-		return renderNode;
+		return modalRating;
 	}
 	
 	function openModal(e){
