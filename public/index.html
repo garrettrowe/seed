@@ -479,7 +479,7 @@
 				if (typeof res.rows[0].doc[i] === "object"){
 					modalTitle.setContent("<h3>" + res.rows[0].doc[i].title.replace("*","<img src='./images/hq.png'>") + "</h3><hr width=92%>" );
 					modal.setContent("<div>" + res.rows[0].doc[i].content + "</div>");
-					modalRating.setContent("<hr width=92%><div id='rating" + res.rows[0].doc[i]._id + "'></div><script>var mR = rating(document.querySelector('#rating" + res.rows[0].doc[i]._id + "'), 0, 5, function(rating) { alert(rating); });<//script>" );
+					var mR = rating(document.querySelector('#rating'), 0, 5, function(rating) { alert(rating + " " + res.rows[0].doc._id ); });
 				}
 			}); 
 		});
@@ -571,6 +571,7 @@
 	function _createRating(mcontent) {
 	    modalRating = new Surface({
 			size: [undefined, 60],
+			content: '<div id="rating"></div>',
 			properties:{
 				backgroundColor:'#008abf',
 				color:'white',
