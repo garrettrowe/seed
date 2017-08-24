@@ -183,22 +183,22 @@
 				textAlign : 'center',
 			},
 			classes: ['help-cell'],
-			content: "Communications Market Events Calendar & Planner"
+			content: "Communications Market <br> Events Calendar & Planner"
 		}));
 		views.push(new Surface({
 			size: [270, 80],
 			classes: ['help-cell'],
-			content: "<div class='helpPics'><img src='./images/questions.png'></div><div style='width:200px; float:left;'>Events Calendar</div>"
+			content: "<div class='helpPics'><img src='./images/questions.png'></div><div style='width:200px; float:left;'>Events Calendar. View upcoming and historical events.</div>"
 		}));
 		views.push(new Surface({
 			size: [270, 55],
 			classes: ['help-cell'],
-			content: "<div class='helpPics'><img src='./images/documentation.png'></div><div style='width:200px; float:left;'>Available event modules</div>"
+			content: "<div class='helpPics'><img src='./images/documentation.png'></div><div style='width:200px; float:left;'>Event modules.  Find available content to propose for a new event.</div>"
 		}));
 		views.push(new Surface({
 			size: [270, 100],
 			classes: ['help-cell'],
-			content: "<div class='helpPics'><img src='./images/user.png'></div><div style='width:200px; float:left;'>User Feedback and Input</div>"
+			content: "<div class='helpPics'><img src='./images/user.png'></div><div style='width:200px; float:left;'>User Feedback and Input.  Propose new events and patterns.</div>"
 		}));
 		views.push(new Surface({
 			size: [270, 50],
@@ -479,6 +479,7 @@
 				if (typeof res.rows[0].doc[i] === "object"){
 					modalTitle.setContent("<h3>" + res.rows[0].doc[i].title.replace("*","<img src='./images/hq.png'>") + "</h3><hr width=92%>" );
 					modal.setContent("<div>" + res.rows[0].doc[i].content + "</div>");
+					modalRating.setContent('<div id="rating" class="c-rating"></div>');
 					var mR = rating(document.querySelector('#rating'), 0, 5, function(rating) { alert(rating + " " + res.rows[0].doc._id ); });
 				}
 			}); 
@@ -571,7 +572,7 @@
 	function _createRating(mcontent) {
 	    modalRating = new Surface({
 			size: [undefined, 60],
-			content: '<div id="rating" class="c-rating"></div>',
+			
 			properties:{
 				backgroundColor:'#008abf',
 				color:'white',
