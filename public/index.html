@@ -86,13 +86,6 @@
     var stars = [];
     var callback = function(rating) { alert(rating); };
 
-    function iterate(collection, callback) {
-      for (var i = 0; i < collection.length; i++) {
-        var item = collection[i];
-        callback(item, i);
-      }
-    }
-
     function attachStarEvents(star) {
       starMouseOver(star);
       starMouseOut(star);
@@ -101,15 +94,20 @@
 
     function starMouseOver(star) {
       star.on('mouseover', function(e) {
-        iterate(stars, function(item, index) {
-          if (index <= parseInt(star.attributes.dataIndex)) {
-            item.classList.push('is-active');
+
+		for (var i = 0; i < maxRating; i++) {
+          if (i <= parseInt(star.attributes.dataIndex)) {
+            stars[i].classList.push('is-active');
           } else {
-            if (index > -1) {
-			    item.classList.splice(item.classList.indexOf('is-active'), 1);
+            if (stars[i].classList.indexOf('is-active') > -1) {
+			    star.classList.splice(stars[i].classList.indexOf('is-active'), 1);
 			}
           }
-        });
+      }
+
+
+
+
       });
     }
 
@@ -135,15 +133,16 @@
 
       currentRating = value || currentRating;
 
-      iterate(stars, function(star, index) {
-        if (index < currentRating) {
-          star.classList.push('is-active');
+      for (var i = 0; i < maxRating; i++) {
+        if (i < currentRating) {
+          stars[i].classList.push('is-active');
         } else {
-        	if (index > -1) {
-			    star.classList.splice(star.classList.indexOf('is-active'), 1);
+        	if (stars[i].classList.indexOf('is-active') > -1) {
+			    star.classList.splice(stars[i].classList.indexOf('is-active'), 1);
 			}
         }
-      });
+    }
+
 
       if (callback && doCallback) { callback(getRating()); }
     }
@@ -638,7 +637,9 @@
 	    var modalRating = new ContainerSurface({
 			size: [undefined, 60],
 			properties:{
-				margin: '7px 0px 0px 0px'
+				margin: '7px 0px 0px 0px',
+				textAlign: 'center',
+				zIndex: '51',
 			}
 		});
 
