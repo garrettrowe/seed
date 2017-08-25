@@ -16,7 +16,6 @@
 		<link rel="stylesheet" type="text/css" href="styles/app.css" />
 		<link rel="stylesheet" type="text/css" href="styles/rating.css" />
 		<script type="text/javascript" src="lib/c.js"></script>
-		<script type="text/javascript" src="lib/rating.js"></script>
     </head>
     <body>
 	<script defer="defer">
@@ -82,6 +81,73 @@
 	var mpd = undefined;
 	var mR = undefined;
 	var url = "https://355bd056-cc3e-4264-ad1b-e9c8af4db98a-bluemix:85726babe099aad16cc4abde52b4de79b93cfd08d094633cec2ab0519287ecb5@355bd056-cc3e-4264-ad1b-e9c8af4db98a-bluemix.cloudant.com/";
+	var currentRating = 5;
+	var maxRating = 5;
+    var stars = [];
+    var callback = function(rating) { alert(rating); };
+
+    function iterate(collection, callback) {
+      for (var i = 0; i < collection.length; i++) {
+        var item = collection[i];
+        callback(item, i);
+      }
+    }
+
+    function attachStarEvents(star) {
+      starMouseOver(star);
+      starMouseOut(star);
+      starClick(star);
+    }
+
+    function starMouseOver(star) {
+      star.on('mouseover', function(e) {
+        iterate(stars, function(item, index) {
+          if (index <= parseInt(star.getAttribute('data-index'))) {
+            item.classList.add('is-active');
+          } else {
+            item.classList.remove('is-active');
+          }
+        });
+      });
+    }
+
+    function starMouseOut(star) {
+      star.on('mouseout', function(e) {
+        if (stars.indexOf(e.relatedTarget) === -1) {
+          setRating(null, false);
+        }
+      });
+    }
+
+    function starClick(star) {
+      star.on('click', function(e) {
+        e.preventDefault();
+        setRating(parseInt(star.getAttribute('data-index')) + 1, true);
+      });
+    }
+
+
+    function setRating(value, doCallback) {
+      if (value && value < 0 || value > maxRating) { return; }
+      if (doCallback === undefined) { doCallback = true; }
+
+      currentRating = value || currentRating;
+
+      iterate(stars, function(star, index) {
+        if (index < currentRating) {
+          star.classList.add('is-active');
+        } else {
+          star.classList.remove('is-active');
+        }
+      });
+
+      if (callback && doCallback) { callback(getRating()); }
+    }
+
+    function getRating() {
+      return currentRating;
+    }
+
 
     var mainContext = Engine.createContext();
 
@@ -480,7 +546,8 @@
 				if (typeof res.rows[0].doc[i] === "object"){
 					modalTitle.setContent("<h3>" + res.rows[0].doc[i].title + "</h3><hr width=92%>" );
 					modal.setContent("<div>" + res.rows[0].doc[i].content + "</div>");
-					mR = rating(modalRating, 0, 5, function(rating) { alert(rating + " " + res.rows[0].doc._id ); });	
+					
+					
 				}
 			}); 
 		});
@@ -564,17 +631,36 @@
 	}
 
 	function _createRating(mcontent) {
-	    modalRating = new Surface({
+	    var modalRating = new ContainerSurface({
 			size: [undefined, 60],
 			properties:{
-				backgroundColor:'#008abf',
-				color:'white',
-				textAlign: 'center',
-				zIndex: '51',
-			},
-			classes: ['c-rating'],
-			id:'rating'
+				margin: '7px 0px 0px 0px'
+			}
 		});
+
+		var grid = new SequentialLayout({direction:0});	 
+		stars = []; 
+		grid.sequenceFrom(stars);
+
+		var star = undefined;
+		for (var i = 0; i < maxRating; i++) {
+			        if (i < currentRating) { 
+			        	var star = new Surface({
+							classes: ['c-rating__item', 'is-active'],
+							attributes: {'data-index': i}
+						});
+			        }
+			        else{
+			        	var star = new Surface({
+							classes: ['c-rating__item'],
+							attributes: {'data-index': i}
+						});
+			        }
+			        attachStarEvents(star);
+			        stars.push(star);
+		}
+		
+		modalRating.add(grid);
 		return modalRating;
 	}
 	
