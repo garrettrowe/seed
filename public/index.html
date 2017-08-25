@@ -480,6 +480,8 @@
 				if (typeof res.rows[0].doc[i] === "object"){
 					modalTitle.setContent("<h3>" + res.rows[0].doc[i].title + "</h3><hr width=92%>" );
 					modal.setContent("<div>" + res.rows[0].doc[i].content + "</div>");
+					modalRating.querySelector('#rating').innerHTML = "";
+					mR = rating(modalRating.querySelector('#rating'), 0, 5, function(rating) { alert(rating + " " + res.rows[0].doc._id ); });	
 				}
 			}); 
 		});
@@ -581,9 +583,7 @@
 		modalscrollview.contentscroll.goToFirstPage();    
 		viewid = e.currentTarget.id;
 		startview = Date.now();
-		lightbox.show(modalscrollview);
-		modalscrollview.querySelector('#rating').innerHTML = "";
-		mR = rating(modalscrollview.querySelector('#rating'), 0, 5, function(rating) { alert(rating + " " + e.currentTarget.id ); });			
+		lightbox.show(modalscrollview);		
 	}
 	
 	function openUsrInput(e){
