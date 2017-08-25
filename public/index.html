@@ -480,7 +480,6 @@
 				if (typeof res.rows[0].doc[i] === "object"){
 					modalTitle.setContent("<h3>" + res.rows[0].doc[i].title + "</h3><hr width=92%>" );
 					modal.setContent("<div>" + res.rows[0].doc[i].content + "</div>");
-					modalRating.querySelector('#rating').innerHTML = "";
 					mR = rating(modalRating.querySelector('#rating'), 0, 5, function(rating) { alert(rating + " " + res.rows[0].doc._id ); });	
 				}
 			}); 
@@ -567,13 +566,14 @@
 	function _createRating(mcontent) {
 	    modalRating = new Surface({
 			size: [undefined, 60],
-			content: '<div id="rating" class="c-rating"></div>',
 			properties:{
 				backgroundColor:'#008abf',
 				color:'white',
 				textAlign: 'center',
 				zIndex: '51',
 			},
+			classes: ['c-rating'],
+			id:'rating'
 		});
 		return modalRating;
 	}
