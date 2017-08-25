@@ -81,7 +81,7 @@
 	var mpd = undefined;
 	var mR = undefined;
 	var url = "https://355bd056-cc3e-4264-ad1b-e9c8af4db98a-bluemix:85726babe099aad16cc4abde52b4de79b93cfd08d094633cec2ab0519287ecb5@355bd056-cc3e-4264-ad1b-e9c8af4db98a-bluemix.cloudant.com/";
-	var currentRating = 5;
+	var currentRating = 0;
 	var maxRating = 5;
     var stars = [];
     var callback = function(rating) { alert(rating); };
@@ -105,7 +105,9 @@
           if (index <= parseInt(star.attributes.dataIndex)) {
             item.classList.push('is-active');
           } else {
-            delete item.classList['is-active'];
+            if (index > -1) {
+			    item.classList.splice(item.classList.indexOf('is-active'), 1);
+			}
           }
         });
       });
@@ -137,7 +139,9 @@
         if (index < currentRating) {
           star.classList.push('is-active');
         } else {
-          delete star.classList['is-active'];
+        	if (index > -1) {
+			    star.classList.splice(star.classList.indexOf('is-active'), 1);
+			}
         }
       });
 
@@ -245,7 +249,7 @@
 		var views = [];
 		grid.sequenceFrom(views);
 		views.push(new Surface({
-			size: [270, 110],
+			size: [270, 90],
 			properties:{
 				textAlign : 'center',
 			},
@@ -258,7 +262,7 @@
 			content: "<div class='helpPics'><img src='./images/questions.png'></div><div style='width:200px; float:left;'>Events Calendar. View upcoming and historical events.</div>"
 		}));
 		views.push(new Surface({
-			size: [270, 55],
+			size: [270, 80],
 			classes: ['help-cell'],
 			content: "<div class='helpPics'><img src='./images/documentation.png'></div><div style='width:200px; float:left;'>Event modules.  Find available content to propose for a new event.</div>"
 		}));
