@@ -480,7 +480,7 @@
 				if (typeof res.rows[0].doc[i] === "object"){
 					modalTitle.setContent("<h3>" + res.rows[0].doc[i].title + "</h3><hr width=92%>" );
 					modal.setContent("<div>" + res.rows[0].doc[i].content + "</div>");
-					mR = rating(modalRating.querySelector('#rating'), 0, 5, function(rating) { alert(rating + " " + res.rows[0].doc._id ); });	
+					mR = rating(modalRating, 0, 5, function(rating) { alert(rating + " " + res.rows[0].doc._id ); });	
 				}
 			}); 
 		});
