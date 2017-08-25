@@ -14,7 +14,6 @@
 		<link rel="apple-touch-startup-image" href="images/splash.png">
 
 		<link rel="stylesheet" type="text/css" href="styles/app.css" />
-		<link rel="stylesheet" type="text/css" href="styles/rating.css" />
 		<script type="text/javascript" src="lib/c.js"></script>
     </head>
     <body>
@@ -48,8 +47,8 @@
 	var TransitionableTransform = famous.transitions.TransitionableTransform;
 	var Scrollview  = famous.views.Scrollview;
 	
-	var searchFields = ['questions.title', 'questions.content', 'documentation.title', 'documentation.content', 'user.title', 'user.content'];
-	var tabMapping = ['questions', 'documentation', 'user'];
+	var searchFields = ['calendar.title', 'calendar.content', 'documentation.title', 'documentation.content', 'user.title', 'user.content'];
+	var tabMapping = ['calendar', 'documentation', 'user'];
 	var layout = new HeaderFooterLayout({headerSize: 50,footerSize: 50});
 	
 	var search = undefined;
@@ -182,17 +181,11 @@
 			return [size[0]-65 ,undefined];
 		});
 		  
-		if (val.title.indexOf("*") == 0 || tabNo < 2){
-			var image = new Surface({
-			  content: '<img src="images/hq.png">',
-			  size: [30, undefined]
-			});
-		}else{
 			var image = new Surface({
 			  content: '<img src="images/bullet.png">',
 			  size: [30, undefined]
 			});
-		}
+		
 		var text = new Surface({
 			properties:{
 				color:'white',
@@ -255,7 +248,7 @@
 		views.push(new Surface({
 			size: [270, 80],
 			classes: ['help-cell'],
-			content: "<div class='helpPics'><img src='./images/questions.png'></div><div style='width:200px; float:left;'>Events Calendar. View upcoming and historical events.</div>"
+			content: "<div class='helpPics'><img src='./images/calendar.png'></div><div style='width:200px; float:left;'>Events Calendar. View upcoming and historical events.</div>"
 		}));
 		views.push(new Surface({
 			size: [270, 80],
@@ -294,7 +287,7 @@
 		var views = [];
 		grid.sequenceFrom(views);
 		var connectIcons = new Surface({
-			content: '<img style="margin: 2px 0px 0px 4px;" id="con0" src="../images/disconnected.png"><br><img style="margin: 0px 0px 0px 4px;" id="con1" src="../images/disconnected.png">',
+			content: '<img style="margin: 2px 0px 0px 4px;" id="con0" src="../images/disconnected.png">',
 			size: [20, undefined]
 		});
 		var addContent = new Surface({
@@ -816,8 +809,7 @@
 	
 	
 	remotereps[0] = new PouchDB(url + 'battle', {skip_setup: true, ajax: {timeout: 20000}});
-	remotereps[1] = new PouchDB('http://10.0.1.2:5984/battle', {ajax: {timeout: 20000}});
-	var rdbs = [0,1];
+	var rdbs = [0];
 
 	rdbs.map(function (index){
 		return pd.sync(remotereps[index], {live: true, retry: true, since: 0, back_off_function: function (delay) {return 10000;}}
