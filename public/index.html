@@ -102,10 +102,10 @@
     function starMouseOver(star) {
       star.on('mouseover', function(e) {
         iterate(stars, function(item, index) {
-          if (index <= parseInt(star.getAttribute('data-index'))) {
-            item.classList.add('is-active');
+          if (index <= parseInt(star.attributes.dataIndex)) {
+            item.classList.push('is-active');
           } else {
-            item.classList.remove('is-active');
+            delete item.classList['is-active'];
           }
         });
       });
@@ -122,7 +122,7 @@
     function starClick(star) {
       star.on('click', function(e) {
         e.preventDefault();
-        setRating(parseInt(star.getAttribute('data-index')) + 1, true);
+        setRating(parseInt(star.attributes.dataIndex) + 1, true);
       });
     }
 
@@ -135,9 +135,9 @@
 
       iterate(stars, function(star, index) {
         if (index < currentRating) {
-          star.classList.add('is-active');
+          star.classList.push('is-active');
         } else {
-          star.classList.remove('is-active');
+          delete star.classList['is-active'];
         }
       });
 
@@ -645,15 +645,17 @@
 		var star = undefined;
 		for (var i = 0; i < maxRating; i++) {
 			        if (i < currentRating) { 
-			        	var star = new Surface({
+			        	 star = new Surface({
+			        		size: [25, 25],
 							classes: ['c-rating__item', 'is-active'],
-							attributes: {'data-index': i}
+							attributes: {'dataIndex': i}
 						});
 			        }
 			        else{
-			        	var star = new Surface({
+			        	 star = new Surface({
+			        		size: [25, 25],
 							classes: ['c-rating__item'],
-							attributes: {'data-index': i}
+							attributes: {'dataIndex': i}
 						});
 			        }
 			        attachStarEvents(star);
