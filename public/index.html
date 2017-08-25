@@ -100,13 +100,10 @@
             stars[i].classList.push('is-active');
           } else {
             if (stars[i].classList.indexOf('is-active') > -1) {
-			    star.classList.splice(stars[i].classList.indexOf('is-active'), 1);
+			    stars[i].classList.splice(stars[i].classList.indexOf('is-active'), 1);
 			}
           }
       }
-
-
-
 
       });
     }
@@ -138,7 +135,7 @@
           stars[i].classList.push('is-active');
         } else {
         	if (stars[i].classList.indexOf('is-active') > -1) {
-			    star.classList.splice(stars[i].classList.indexOf('is-active'), 1);
+			    stars[i].classList.splice(stars[i].classList.indexOf('is-active'), 1);
 			}
         }
     }
@@ -617,7 +614,7 @@
 				backgroundColor:'#008abf',
 				color:'white',
 				textAlign: 'center',
-				zIndex: '51',
+				zIndex: '51'
 			},
 		});
 		return modalTitle;
@@ -637,9 +634,11 @@
 	    var modalRating = new ContainerSurface({
 			size: [undefined, 60],
 			properties:{
+				backgroundColor:'#008abf',
+				color:'white',
 				margin: '7px 0px 0px 0px',
 				textAlign: 'center',
-				zIndex: '51',
+				zIndex: '51'
 			}
 		});
 
