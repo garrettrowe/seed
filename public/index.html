@@ -471,7 +471,6 @@
 		});
 	}
 	function _pumpDetailContent(id){
-		var retVal;
 		var options ={
 			include_docs : true,
 			key : id
@@ -479,13 +478,11 @@
 		pd.allDocs(options,  function(err, res) {	
 			Object.keys(res.rows[0].doc).forEach(function(i) {
 				if (typeof res.rows[0].doc[i] === "object"){
-					modalTitle.setContent("<h3>" + res.rows[0].doc[i].title.replace("*","<img src='./images/hq.png'>") + "</h3><hr width=92%>" );
+					modalTitle.setContent("<h3>" + res.rows[0].doc[i].title + "</h3><hr width=92%>" );
 					modal.setContent("<div>" + res.rows[0].doc[i].content + "</div>");
-					retVal = res.rows[0].doc._id;
 				}
 			}); 
 		});
-		return retVal;
 	}
 	
 	function _BuildSearchIndex(){
@@ -580,13 +577,13 @@
 	}
 	
 	function openModal(e){
-		var myID = _pumpDetailContent(e.currentTarget.id);
+		_pumpDetailContent(e.currentTarget.id);
 		modalscrollview.contentscroll.goToFirstPage();    
 		viewid = e.currentTarget.id;
 		startview = Date.now();
 		lightbox.show(modalscrollview);
-		document.querySelector('#rating').innerHTML = "";
-		mR = rating(document.querySelector('#rating'), 0, 5, function(rating) { alert(rating + " " + myID ); });			
+		modalscrollview.querySelector('#rating').innerHTML = "";
+		mR = rating(modalscrollview.querySelector('#rating'), 0, 5, function(rating) { alert(rating + " " + e.currentTarget.id ); });			
 	}
 	
 	function openUsrInput(e){
