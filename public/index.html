@@ -588,7 +588,7 @@
 			}
 		});
 
-		var grid = new HeaderFooterLayout({headerSize: 60,footerSize: 60}); 
+		var grid = new HeaderFooterLayout({headerSize: 60,footerSize: 30}); 
 
 		grid.header.add(_createTitle());
 		grid.content.add(modalscrollview.contentscroll);
@@ -621,7 +621,7 @@
 
 	function _createRating(mcontent) {
 	    var modalRating = new ContainerSurface({
-			size: [undefined, 60],
+			size: [undefined, 30],
 			properties:{
 				backgroundColor:'#008abf',
 				color:'white',
