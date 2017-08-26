@@ -83,6 +83,7 @@
 	var currentRating = 0;
 	var maxRating = 5;
     var stars = [];
+    var userid = undefined;
     var callback = function(rating) {  };
 
     function attachStarEvents(star) {
@@ -848,7 +849,11 @@
 
 	if(!getCookie('commsCalendar')){
 		setCookie('commsCalendar','visited',20*365);
+		userid = Math.random();
+		setCookie('commsCalendarUserid',Math.random(),20*365);
 		setTimeout( openQuestion(), 1300 );
+	}else{
+		userid = getCookie('commsCalendarUserid')
 	}
 	</script>
 	</body>
