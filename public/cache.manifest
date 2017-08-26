@@ -1,21 +1,20 @@
 CACHE MANIFEST
-# 20160513-2019
+# 20160513-2020
 
 images/bullet.png
 images/cancel.png
 images/documentation.png
-images/hq.png
 images/icon152.png
 images/icon16.png
 images/icon196.png
 images/loading.gif
 images/ok.png
 images/ondocumentation.png
-images/onquestions.png
+images/oncalendar.png
 images/onuser.png
 images/plus.png
-images/question.png
 images/questions.png
+images/calendar.png
 images/search.png
 images/splash.png
 images/swipe.png
