@@ -629,10 +629,10 @@
 				zIndex: '51'
 			}
 		});
-		var ratingContainer = new ContainerSurface({
-			size: [125, 60],
-			classes: ['center']
-		});
+		var renderNode = new RenderNode(new Modifier({
+		    align: [0.5, 0],
+		    origin: [0.5, 0]
+		}));
 
 		var grid = new SequentialLayout({direction:0});	 
 
@@ -658,8 +658,8 @@
 			        attachStarEvents(star);
 			        stars.push(star);
 		}
-		ratingContainer.add(grid);
-		modalRating.add(ratingContainer);
+		renderNode.add(grid);
+		modalRating.add(renderNode);
 		return modalRating;
 	}
 	
