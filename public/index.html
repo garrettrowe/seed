@@ -630,13 +630,13 @@
 			}
 		});
 
-		var grid = new SequentialLayout({
-			direction:0,
+		var grid = new SequentialLayout({direction:0});	 
+		var alignModifier = new Modifier({
 			properties:{
 				width:'125px',
 				margin: '0 auto'
 			}
-		});	 
+		});
 		stars = []; 
 		grid.sequenceFrom(stars);
 
@@ -661,7 +661,7 @@
 			        attachStarEvents(star);
 		}
 		
-		modalRating.add(grid);
+		modalRating.add(alignModifier).add(grid);
 		return modalRating;
 	}
 	
