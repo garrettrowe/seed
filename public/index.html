@@ -632,10 +632,8 @@
 
 		var grid = new SequentialLayout({direction:0});	 
 		var alignModifier = new Modifier({
-			properties:{
-				width:'125px',
-				margin: '0 auto'
-			}
+			size: [125, undefined],
+			classes: ['center']
 		});
 		stars = []; 
 		grid.sequenceFrom(stars);
@@ -646,16 +644,14 @@
 			        	 star = new Surface({
 			        		size: [25, 25],
 							classes: ['c-rating__item', 'is-active'],
-							attributes: {'dataindex': i},
-							id: 'ratingstar' + i
+							attributes: {'dataindex': i, id: 'ratingstar' + i}
 						});
 			        }
 			        else{
 			        	 star = new Surface({
 			        		size: [25, 25],
 							classes: ['c-rating__item'],
-							attributes: {'dataindex': i},
-							id: 'ratingstar' + i
+							attributes: {'dataindex': i, id: 'ratingstar' + i}
 						});
 			        }
 			        attachStarEvents(star);

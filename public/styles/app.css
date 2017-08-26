@@ -40,3 +40,6 @@
 .c-rating__item.is-active {
   background-position: -24px 0;
 }
+ .center{
+  margin:0 auto;
+ }
