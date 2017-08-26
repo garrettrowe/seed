@@ -629,12 +629,13 @@
 				zIndex: '51'
 			}
 		});
-
-		var grid = new SequentialLayout({direction:0});	 
-		var alignModifier = new Modifier({
-			size: [125, undefined],
+		var ratingContainer = new ContainerSurface({
+			size: [125, 60],
 			classes: ['center']
 		});
+
+		var grid = new SequentialLayout({direction:0});	 
+
 		stars = []; 
 		grid.sequenceFrom(stars);
 
@@ -657,8 +658,8 @@
 			        attachStarEvents(star);
 			        stars.push(star);
 		}
-		
-		modalRating.add(alignModifier).add(grid);
+		ratingContainer.add(grid);
+		modalRating.add(ratingContainer);
 		return modalRating;
 	}
 	
