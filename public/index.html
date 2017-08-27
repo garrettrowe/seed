@@ -16,6 +16,7 @@
 		<link rel="stylesheet" type="text/css" href="styles/app.css" />
 		<script type="text/javascript" src="lib/c.js"></script>
 		<script type="text/javascript" src="lib/jq.js"></script>
+		<script type="text/javascript" src="lib/mce.js"></script>
     </head>
     <body>
 	<script defer="defer">
@@ -441,10 +442,15 @@
 		views.push(new Surface({
 			size: [5, 5]
 		}));
-		userInputContent = new TextareaSurface({
+		userInputContent = new Surface({
 			size: [window.innerWidth -45, window.innerHeight - 160],
-			placeholder: "",
-			classes: ['rounded', 'uinput']
+			properties:{
+				backgroundColor: 'white',
+				overflow: 'auto',
+				border: '1px solid black',
+				WebkitOverflowScrolling : 'touch'
+			},
+			content: "<div class='editme' id='tinymceeditwindow'></div>"
 		});
 
 		views.push(userInputContent);
@@ -681,6 +687,20 @@
 		if (!usrInputOpen){
 			usrInputOpen = true;
 			usrInput.lightbox.show(usrInput);
+			if (!usrInputFired){
+				usrInputFired = true;
+				setTimeout(function(){tinymce.init({
+					selector: "div.editme", 
+					height: window.innerHeight - 180,
+					inline: false,
+					menubar : false, 
+					resize: false, 
+					statusbar : false
+				});}, 500);
+			}
+			else{
+				setTimeout(function(){tinymce.EditorManager.execCommand('mceAddEditor',true, 'tinymceeditwindow');}, 500);
+			}
 		}
 	}
 	
