@@ -15,6 +15,7 @@
 
 		<link rel="stylesheet" type="text/css" href="styles/app.css" />
 		<script type="text/javascript" src="lib/c.js"></script>
+		<script type="text/javascript" src="lib/jq.js"></script>
     </head>
     <body>
 	<script defer="defer">
@@ -74,7 +75,6 @@
 	var startview = undefined;
 	var endview = undefined;
 	var viewid = undefined;
-	var geoloc = undefined;
 	var remotereps = [];
 	var pd = undefined;
 	var mpd = undefined;
@@ -178,10 +178,13 @@
 			return [size[0]-65 ,undefined];
 		});
 		  
-			var image = new Surface({
-			  content: '<img src="images/bullet.png">',
-			  size: [30, undefined]
-			});
+		var pretext = new Surface({});
+		if(tabNo > 0){
+			pretext.setContent('<img src="images/bullet.png">');
+		}
+		else{
+			pretext.setContent('<sup>' + val.month + '</sup>/<sub>' + val.day + '</sub>');
+		}
 		
 		var text = new Surface({
 			properties:{
@@ -191,7 +194,7 @@
 			content: val.title.replace("*","")
 		});
 			
-		views.push(image);
+		views.push(pretext);
 		views.push(text);
 		mastersurface.add(sizeModifier).add(grid);
 		tab[tabNo].insert(pos, mastersurface, {size: [0, 0]}); 
@@ -285,7 +288,7 @@
 		grid.sequenceFrom(views);
 		var connectIcons = new Surface({
 			content: '<img style="margin: 2px 0px 0px 4px;" id="con0" src="../images/disconnected.png">',
-			size: [20, undefined]
+			size: [40, undefined]
 		});
 		var addContent = new Surface({
 			content: '<img style="margin: 5px 5px 0px 10px;" src="images/plus.png">',
@@ -536,8 +539,6 @@
 				if (typeof res.rows[0].doc[i] === "object"){
 					modalTitle.setContent("<h3>" + res.rows[0].doc[i].title + "</h3><hr width=92%>" );
 					modal.setContent("<div>" + res.rows[0].doc[i].content + "</div>");
-					
-					
 				}
 			}); 
 		});
@@ -594,7 +595,6 @@
 		grid.header.add(_createTitle());
 		grid.content.add(modalscrollview.contentscroll);
 		grid.footer.add(_createRating());
-
 		modalscrollview.add(grid);
 	}
 	function _createTitle(mcontent) {
@@ -676,7 +676,6 @@
 		if (!usrInputOpen){
 			usrInputOpen = true;
 			usrInput.lightbox.show(usrInput);
-			navigator.geolocation.getCurrentPosition(getGeoLoc);
 		}
 	}
 	
@@ -742,9 +741,7 @@
 		});
 		return lbsync;
 	}
-	function getGeoLoc(position) {
-		geoloc =  position.coords.latitude + "," + position.coords.longitude; 
-	}
+
 	function submitUsrInput(e){
 		if (userInputTitle.getValue().length>2 && userInputContent.getValue().length>2){
 			var docid = userInputTitle.getValue().replace(/[^a-z0-9]/gi, '') + "_" + Date.now();
@@ -755,7 +752,6 @@
 			  "user": {
 				"title": userInputTitle.getValue().replace(/[^a-z0-9\s]/gi, ' ').replace(/  /g, ' ').replace(/  /g, ' ').trim(),
 				"content": userInputContent.getValue().trim(),
-				"geoloc": geoloc,
 				"timestamp": new Date(d.getTime() - d.getTimezoneOffset() * 60000).toJSON().slice(0, 16).replace("T", " ") + "U",
 				"epoch": new Date().getTime() - 7200000
 			  }

@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# 20160513-2020
+# 20160513-2021
 
 images/bullet.png
 images/cancel.png
@@ -13,7 +13,7 @@ images/ondocumentation.png
 images/oncalendar.png
 images/onuser.png
 images/plus.png
-images/questions.png
+images/question.png
 images/calendar.png
 images/search.png
 images/splash.png
@@ -24,56 +24,7 @@ images/disconnected.png
 index.html
 help.html
 styles/app.css
-images/wx/00.png
-images/wx/01.png
-images/wx/02.png
-images/wx/03.png
-images/wx/04.png
-images/wx/05.png
-images/wx/06.png
-images/wx/07.png
-images/wx/08.png
-images/wx/09.png
-images/wx/10.png
-images/wx/11.png
-images/wx/12.png
-images/wx/13.png
-images/wx/14.png
-images/wx/15.png
-images/wx/16.png
-images/wx/17.png
-images/wx/18.png
-images/wx/19.png
-images/wx/20.png
-images/wx/21.png
-images/wx/22.png
-images/wx/23.png
-images/wx/24.png
-images/wx/25.png
-images/wx/26.png
-images/wx/27.png
-images/wx/28.png
-images/wx/29.png
-images/wx/30.png
-images/wx/31.png
-images/wx/32.png
-images/wx/33.png
-images/wx/34.png
-images/wx/35.png
-images/wx/36.png
-images/wx/37.png
-images/wx/38.png
-images/wx/39.png
-images/wx/40.png
-images/wx/41.png
-images/wx/42.png
-images/wx/43.png
-images/wx/44.png
-images/wx/45.png
-images/wx/46.png
-images/wx/47.png
-images/wx/na.png
-
+lib/jq.js
 lib/c.js
 
 NETWORK:
