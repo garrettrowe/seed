@@ -712,14 +712,16 @@
 			lightbox.show(questionSurface);
 		}
 	}
-	
+
 	function closeUsrInput(){
-		userInputTitle.setValue("");
-		userInputContent.setValue("");
 		usrInputOpen = false;
 		usrInput.lightbox.hide();
+		userInputTitle.setValue("");
+		tinymce.get('tinymceeditwindow').setContent(''); 
+		tinymce.EditorManager.execCommand('mceRemoveEditor',true, 'tinymceeditwindow');
 		submitMessages.setContent("");
 	}
+
 	function closeLightbox(){
 		if(viewid){
 			mpd.post({time_stamp: new Date(), docview: {doc_id : viewid, time: Date.now() - startview}});
