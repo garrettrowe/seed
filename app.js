@@ -23,8 +23,10 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var logger = require('morgan');
 var errorHandler = require('errorhandler');
-var multipart = require('connect-multiparty')
+var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
+var manifest = require('cache-manifest-generator');
+
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -38,6 +40,12 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+
+
+
 
 // development only
 if ('development' == app.get('env')) {
@@ -103,6 +111,8 @@ app.get('/', function(req, res){
 app.get('/cloudanturl', function(req, res){
 	res.json({"cloudantURL" : cloudantURL + "/"});
 });
+
+app.get('/cache.manifest', manifest([{ file: 'public', url: '/' }]));
 
 http.createServer(app).listen(app.get('port'), '0.0.0.0', function() {
     console.log('Express server listening on port ' + app.get('port'));
