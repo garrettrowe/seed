@@ -178,7 +178,11 @@
 			return [size[0]-65 ,undefined];
 		});
 		  
-		var pretext = new Surface({size: [30, undefined]});
+		var pretext = new Surface({
+			size: [35, undefined],
+			color:'white'
+		});
+
 		if(tabNo > 0){
 			pretext.setContent('<img src="images/bullet.png">');
 		}
