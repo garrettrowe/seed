@@ -183,7 +183,8 @@
 			pretext.setContent('<img src="images/bullet.png">');
 		}
 		else{
-			pretext.setContent('<sup>' + val.month + '</sup>/<sub>' + val.day + '</sub>');
+			var d = new Date(val.date)
+			pretext.setContent('<sup>' + (d.getMonth() + 1) + '</sup>/<sub>' + d.getDay() + '</sub>');
 		}
 		
 		var text = new Surface({
@@ -752,8 +753,7 @@
 			  "user": {
 				"title": userInputTitle.getValue().replace(/[^a-z0-9\s]/gi, ' ').replace(/  /g, ' ').replace(/  /g, ' ').trim(),
 				"content": userInputContent.getValue().trim(),
-				"timestamp": new Date(d.getTime() - d.getTimezoneOffset() * 60000).toJSON().slice(0, 16).replace("T", " ") + "U",
-				"epoch": new Date().getTime() - 7200000
+				"date": new Date(d.getTime() - d.getTimezoneOffset() * 60000).toJSON().slice(0, 10),
 			  }
 			};
 			pd.put(doc).then(function (response) {
