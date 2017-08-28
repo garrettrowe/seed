@@ -186,7 +186,7 @@
 			}
 		});
 
-		if(tabNo > 0){
+		if(tabNo == tabMapping['documentation'] || tabNo == tabMapping['user']){
 			pretext.setContent('<img src="images/bullet.png">');
 		}
 		else{
@@ -531,7 +531,9 @@
 		for (var i = 0; i < res.rows.length; i++){
 			for (var j = 0; j < tabMapping.length; j++){
 				if (typeof res.rows[i].doc[tabMapping[j]] != "undefined"){
-					_pushContentSurface(j, res.rows[i].id, res.rows[i].doc[tabMapping[j]], pos);
+					if (tabMapping[j] != "user" || res.rows[i].doc[tabMapping[j]].userid == userid){
+						_pushContentSurface(j, res.rows[i].id, res.rows[i].doc[tabMapping[j]], pos);
+					}
 				}
 			}
 		} 
@@ -786,7 +788,8 @@
 			  "user": {
 				"title": userInputTitle.getValue(),
 				"content": tinymce.activeEditor.getContent({format : 'raw'}),
-				"date": new Date(d.getTime() - d.getTimezoneOffset() * 60000).toJSON().slice(0, 10),
+				"edate": new Date(d.getTime() - d.getTimezoneOffset() * 60000).toJSON().slice(0, 10).replace("-","/"),
+				"userid" : userid
 			  }
 			};
 			pd.put(doc).then(function (response) {
