@@ -191,7 +191,7 @@
 		}
 		else{
 			var d = new Date(val.edate)
-			pretext.setContent('<sup>' + (d.getMonth() + 1) + '</sup>/<sub>' + d.getDay() + '</sub>');
+			pretext.setContent('<sup>' + (d.getMonth() + 1) + '</sup>/<sub>' + d.getDate() + '</sub>');
 		}
 		
 		var text = new Surface({
@@ -199,7 +199,7 @@
 				color:'white',
 				wordWrap: 'break-word'
 			},
-			content: val.title.replace("*","")
+			content: val.title
 		});
 			
 		views.push(pretext);
