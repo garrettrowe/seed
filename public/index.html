@@ -762,11 +762,16 @@
 			}
 		});
 		lbsync.on('end', function (data) {
-			var velocity = Math.abs(data.velocity[0]);
+			var velocity = data.velocity[0];
 			currentPos.set(origpos);
 			if (velocity > .7) {
+				lightbox.setOutTransform(Transform.translate(500,0,500));
 				closeLightbox();
-			}     
+			}  
+			else if  (velocity < -.7) {
+				lightbox.setOutTransform(Transform.translate(-500,0,500));
+				closeLightbox();
+			}    
 		});
 		return lbsync;
 	}
