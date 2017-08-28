@@ -531,7 +531,7 @@
 		for (var i = 0; i < res.rows.length; i++){
 			for (var j = 0; j < tabMapping.length; j++){
 				if (typeof res.rows[i].doc[tabMapping[j]] != "undefined"){
-					if (tabMapping[j] != "user" || res.rows[i].doc[tabMapping[j]].userid == userid){
+					if (tabMapping[j] != "user" || res.rows[i].doc[tabMapping[j]].userid == userid || res.rows[i].doc[tabMapping[j]].userid == 0){
 						_pushContentSurface(j, res.rows[i].id, res.rows[i].doc[tabMapping[j]], pos);
 					}
 				}
