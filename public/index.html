@@ -136,8 +136,6 @@
         	document.getElementById("ratingstar"+i).classList.remove('is-active');
         }
     }
-
-
       if (callback && doCallback) { callback(getRating()); }
     }
 
@@ -375,7 +373,7 @@
 				for (var i = 0; i < tab.length; i++){
 					tab[i].removeAll();
 				}
-				mpd.post({time_stamp: new Date(), search: {search_str: search.getValue(), hit_count: res.rows.length }});
+				mpd.post({"time_stamp": new Date(), "userid" : userid , "search": {"search_str": search.getValue(), "hit_count": res.rows.length}});
 				_loadTabs(res, -1);
 				
 				for (var i = 0; i < tab.length; i++){
@@ -726,7 +724,7 @@
 
 	function closeLightbox(){
 		if(viewid){
-			mpd.post({time_stamp: new Date(), docview: {doc_id : viewid, time: Date.now() - startview}});
+			mpd.post({"time_stamp": new Date(), "userid": userid , "docview": {"doc_id" : viewid, "time": Date.now() - startview}});
 			viewid = undefined;
 			startview = undefined;
 		}
