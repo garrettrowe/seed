@@ -357,7 +357,7 @@
 			tab[i].removeAll();
 		}
 		if (search.getValue() == ''){
-			_pumpList({include_docs : true}, -1);
+			_pumpList({include_docs : true}, 0);
 		}
 		else{
 			for (var i = 0; i < tab.length; i++){
@@ -824,7 +824,7 @@
 			var options ={
 				include_docs : true
 			};
-			_pumpList(options, -1);
+			_pumpList(options, 0);
 		}else{
 			for (var i = 0; i < tab.length; i++){
 				tab[i].push(new Surface({
