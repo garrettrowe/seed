@@ -184,8 +184,17 @@
 			}
 		});
 
-		if(tabNo == tabMapping.indexOf("documentation") || tabNo == tabMapping.indexOf("user")){
+		if(tabNo == tabMapping.indexOf("documentation") ){
 			pretext.setContent('<img src="images/bullet.png">');
+		}
+		else if(tabNo == tabMapping.indexOf("user")){
+			if(val.userid == 0){
+				pretext.setContent('<img src="images/bullet.png">');
+			}
+			else{
+				pretext.setContent('<img src="images/userbullet.png">');
+			}
+			
 		}
 		else{
 			var d = new Date(val.edate)
