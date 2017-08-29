@@ -795,7 +795,7 @@
 			  "user": {
 				"title": userInputTitle.getValue(),
 				"content": tinymce.activeEditor.getContent({format : 'raw'}),
-				"edate": new Date(d.getTime() - d.getTimezoneOffset() * 60000).toJSON().slice(0, 10).replace("-","/"),
+				"edate": new Date(d.getTime() - d.getTimezoneOffset() * 60000).toJSON().slice(0, 10).replace(/-/g,"/"),
 				"userid" : userid
 			  }
 			};
