@@ -75,6 +75,22 @@ html {
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px
 }
+.appModial {
+                background-color:#008abf;
+                color:white;
+                border: 3px solid white;
+                overflow: hidden;
+                z-index: 50;
+}
+.appText{
+    background-color:#008abf;
+                color:white;
+                text-align: center;
+                word-wrap: break-word;
+}
+.appMargin{
+    margin: 7px 10px 0px 10px;
+}
 input[type=button],
 input[type=button]:hover {
     position: relative;

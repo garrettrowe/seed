@@ -176,16 +176,11 @@
 		  
 		var pretext = new Surface({
 			size: [35, undefined],
-			properties:{
-				color:'white'
-			}
+			classes: ['appText']
 		});
 
 		var text = new Surface({
-			properties:{
-				color:'white',
-				wordWrap: 'break-word'
-			}
+			classes: ['appText']
 		});
 
 		if(tabNo == tabMapping.indexOf("documentation") ){
@@ -242,14 +237,7 @@
 	function _createHelp(){
 		questionSurface = new ContainerSurface({
 			size: [290, 420],
-			properties:{
-				backgroundColor:'#008abf',
-				color:'white',
-				border: '3px solid white',
-				overflow: 'hidden',
-				zIndex: '50'
-			},
-			classes: ['rounded']
+			classes: ['rounded', 'appModial']
 		});
 		var grid = new SequentialLayout({direction:1});	  
 		var views = [];
@@ -295,9 +283,7 @@
 	function _addHeader() {
 		var mastersurface = new ContainerSurface({
 			size: [undefined, 60],
-			properties:{
-				margin: '7px 0px 0px 0px'
-			}
+			classes: ['appMargin']
 		});
 		
 		var grid = new SequentialLayout({direction:0});	  
@@ -392,18 +378,14 @@
 						if (tab[i]._dataSource.length == 0){
 							tab[i].push(new Surface({
 								size: [250, 60],
-								properties:{
-									margin: '7px 10px 0px 10px'
-								},
+								classes: ['appMargin'],
 								content: "No search results found on this tab.<br>Check the other tabs for results" 
 							}));
 						}
 					}else{
 						tab[i].push(new Surface({
 							size: [250, 60],
-							properties:{
-								margin: '7px 10px 0px 10px'
-							},
+							classes: ['appMargin'],
 							content: "No search results found on this tab.<br>Check the other tabs for results" 
 						}));
 					}
@@ -417,14 +399,10 @@
 		usrInput = new ContainerSurface({
 			size: [window.innerWidth -20, window.innerHeight - 20],
 			properties:{
-				backgroundColor:'#008abf',
-				color:'white',
-				border: '3px solid white',
 				padding: '2px 10px 2px 10px',
-				wordWrap: 'break-word',
-				zIndex: '50'
+				wordWrap: 'break-word'
 			},
-			classes: ['rounded']
+			classes: ['rounded', 'appModial']
 		});
 		usrInput.lightbox = new Lightbox({
 			inTransform: Transform.translate(50,-500,50),
@@ -438,10 +416,7 @@
 		
 		views.push(new Surface({
 			size: [window.innerWidth -45, 25],
-			properties:{
-				textAlign: 'center',
-				color:'white'
-			},
+			classes: ['appText'];
 			content: "<strong>New Entry</strong>"
 		}));
 		userInputTitle = new InputSurface({
@@ -486,16 +461,12 @@
 		views2.push(submitMessages);
 		views2.push(new Surface({
 			size: [50, 45],
-			properties:{
-				margin: '7px 10px 0px 10px'
-			},
+			classes: ['appMargin'],
 			content: "<img onclick='javascript:closeUsrInput();'  src='./images/cancel.png'>" 
 		}));
 		views2.push(new Surface({
 			size: [60, 45],
-			properties:{
-				margin: '7px 10px 0px 10px'
-			},
+			classes: ['appMargin'],
 			content: "<img onclick='javascript:submitUsrInput();'  src='./images/ok.png'>"
 		}));			
 		views.push(anode.add(grid2));
@@ -580,14 +551,7 @@
 	function _addModal(){
 		modalscrollview = new ContainerSurface({
 			size: [window.innerWidth -20, window.innerHeight - 20],
-			properties:{
-				backgroundColor:'#008abf',
-				color:'white',
-				border: '3px solid white',
-				overflow: 'hidden',
-				zIndex: '50'
-			},
-			classes: ['rounded']
+			classes: ['rounded', 'appModial']
 		});
 		modalscrollview.contentscroll = new FlexScrollView({
 			layout: ListLayout,
@@ -625,11 +589,9 @@
 		modalTitle = new Surface({
 			size: [undefined, 60],
 			properties:{
-				backgroundColor:'#008abf',
-				color:'white',
-				textAlign: 'center',
 				zIndex: '51'
 			},
+			classes: ['appText']
 		});
 		return modalTitle;
 	}
@@ -648,11 +610,9 @@
 	    var modalRating = new ContainerSurface({
 			size: [undefined, 30],
 			properties:{
-				backgroundColor:'#008abf',
-				color:'white',
-				textAlign: 'center',
 				zIndex: '51'
-			}
+			},
+			classes: ['appText']
 		});
 		var renderNode = new RenderNode(new Modifier({
 		    align: [0.5, 0],
