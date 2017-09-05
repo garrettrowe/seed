@@ -171,11 +171,8 @@
 		var views = [];
 		grid.sequenceFrom(views);
 		
-		var sizeModifier = new Modifier();
-		sizeModifier.sizeFrom(function(){
-			var size = mastersurface.getSize();
-			return [size[0]-65 ,undefined];
-		});
+		
+		
 		  
 		var pretext = new Surface({
 			size: [35, undefined],
@@ -210,10 +207,13 @@
 			pretext.setContent('<sup>' + (d.getMonth() + 1) + '</sup>/<sub>' + d.getDate() + '</sub>');
 			text.setContent( val.title);
 		}
+
+
+
 			
 		views.push(pretext);
 		views.push(text);
-		mastersurface.add(sizeModifier).add(grid);
+		mastersurface..add(grid);
 		tab[tabNo].insert(pos, mastersurface, {size: [0, 0]}); 
 	}
 
