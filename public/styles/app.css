@@ -85,8 +85,10 @@ html {
 .appText{
     background-color:#008abf;
                 color:white;
-                text-align: center;
                 word-wrap: break-word;
+}
+.appTitle{
+    text-align: center;
 }
 .appMargin{
     margin: 7px 10px 0px 10px;
