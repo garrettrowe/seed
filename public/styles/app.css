@@ -152,7 +152,7 @@ span.v-text {
     font-weight: 700;
     text-align: center;
     line-height: 50px;
-    color: #fff;
+    color: #a6266e;
     border-top: #fff solid 1px
 }
 .tabbutoff {
@@ -160,7 +160,7 @@ span.v-text {
     font-weight: 400;
     line-height: 50px;
     text-align: center;
-    color: #d3d3d3;
+    color: #f9f9fb;
     border-top: #fff solid 1px
 }
 .navigation {
@@ -185,28 +185,10 @@ pre {
 .json-string {
     color: olive;
 }
-.tab1 {
-    background: url(../images/oncalendar.png) no-repeat 50% 50%;
-}
-.tab1off {
-    background: url(../images/calendar.png) no-repeat 50% 50%;
-}
-.tab2 {
-    background: url(../images/ondocumentation.png) no-repeat 50% 50%;
-}
-.tab2off {
-    background: url(../images/documentation.png) no-repeat 50% 50%;
-}
-.tab3 {
-    background: url(../images/onuser.png) no-repeat 50% 50%;
-}
-.tab3off {
-    background: url(../images/user.png) no-repeat 50% 50%;
-}
 .uinput {
     padding: 6px 15px 6px 15px;
     margin: 3px;
-    background-color: #008abf;
+    background-color: #1d3649;
     color: white;
     border-color: white;
     font-family: Geneva, Tahoma, Verdana, sans-serif;
@@ -305,4 +287,13 @@ a, a:visited {
 }
 .footerBar {
     background-color: #1d3649;
+}
+.icon-default {
+    color: #FFFFFF;
+}
+.icon-red {
+    color: red;
+}
+.plus-button-padding {
+    padding-left: 10px;
 }
