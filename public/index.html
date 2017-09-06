@@ -414,11 +414,6 @@
 		var views = [];
 		grid.sequenceFrom(views);
 		
-		views.push(new Surface({
-			size: [window.innerWidth -45, 25],
-			classes: ['appText'],
-			content: "<strong>New Entry</strong>"
-		}));
 		userInputTitle = new InputSurface({
 			size: [window.innerWidth -45, 35],
 			placeholder: "Add in an entry title here",
@@ -429,9 +424,9 @@
 			classes: ['appDropDown']
 		});
 
-		$select = $('<select />');
-		$.each(tabMapping, function(index, value) {$select.append($('<option>', {index: index, value:value}));});
-		userInputCat.setContent($select.html());
+		$select = $('<select id="userInputDrop" />');
+		$.each(tabMapping, function(index, value) {$select.append($('<option>', {text: value, value:value}));});
+		userInputCat.setContent($select.prop('outerHTML'));
 
 		views.push(userInputTitle);
 		views.push(userInputCat);
@@ -764,7 +759,7 @@
 
 			var doc = {
 			  "_id": docid,
-			  "user": {
+			  $('#userInputDrop').find(":selected").text() : {
 				"title": userInputTitle.getValue(),
 				"pitch": "",
 				"content": tinymce.activeEditor.getContent({format : 'raw'}),
