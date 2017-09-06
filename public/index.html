@@ -775,10 +775,11 @@
 		if (userInputTitle.getValue().length>5 && tinymce.activeEditor.getContent({format : 'raw'}).length>5){
 			var docid = userInputTitle.getValue().replace(/[^a-z0-9]/gi, '') + "_" + Date.now();
 			var d = new Date();
+			var item = $('#userInputDrop').find(":selected").text();
 
 			var doc = {
 			  "_id": docid,
-			  $('#userInputDrop').find(":selected").text() : {
+			  $item : {
 				"title": userInputTitle.getValue(),
 				"pitch": "",
 				"content": tinymce.activeEditor.getContent({format : 'raw'}),
