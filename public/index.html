@@ -424,7 +424,12 @@
 			placeholder: "Add in an entry title here",
 			classes: ['rounded', 'uinput']
 		});
+		userInputCat = new InputSurface({
+			type: "select",
+			value: tabMapping
+		});
 		views.push(userInputTitle);
+		views.push(userInputCat);
 		views.push(new Surface({
 			size: [5, 5]
 		}));
