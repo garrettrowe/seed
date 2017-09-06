@@ -208,7 +208,7 @@
         var titleText = new Surface({
             size: [undefined,true],
             properties:{
-                color:'white'
+                color:'#f9f9fb'
             },
             content: val.title
         });
@@ -498,7 +498,9 @@
 	}
 	
     function _addFooter() {
-        tb = new TabBar({size: [undefined, 50]});  
+        tb = new TabBar({
+            size: [undefined, 50]
+        });
         tb.defineSection(0,{content: '', onClasses: ['tabbuton', 'tab1'], offClasses:['tabbutoff', 'tab1off']});
         tb.defineSection(1,{content: '', onClasses: ['tabbuton', 'tab2'], offClasses:['tabbutoff', 'tab2off']});
 		tb.defineSection(2,{content: '', onClasses: ['tabbuton', 'tab3'], offClasses:['tabbutoff', 'tab3off']});

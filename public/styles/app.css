@@ -48,7 +48,7 @@
     height: 100%
 }
 html {
-    background-color: #008abf
+    background-color: #152935;
 }
 .backfaceVisibility {
     -webkit-backface-visibility: visible;
@@ -65,10 +65,11 @@ html {
     font-size: 12pt;
 }
 .search {
-    border-color: white;
+    border-color: #aeaeae;
     padding: 6px 15px 6px 30px;
     margin: 3px;
-    background: white url(../images/search.png) 4px 6px no-repeat
+    background: #1d3649 url(../images/search.png) 4px 6px no-repeat;
+    color: #f9f9fb;
 }
 .rounded {
     border-radius: 10px;
@@ -76,14 +77,14 @@ html {
     -webkit-border-radius: 10px
 }
 .appModial {
-                background-color:#008abf;
+                background-color:#264a60;
                 color:white;
                 border: 3px solid white;
                 overflow: hidden;
                 z-index: 50;
 }
 .appText{
-    background-color:#008abf;
+    background-color:#264a60;
                 color:white;
                 word-wrap: break-word;
 }
@@ -118,7 +119,8 @@ input[type=button]:hover {
     background-color: #fcfcfc
 }
 .footer {
-    border-top: #000 solid 1px
+    border-top: #000 solid 1px;
+    background-color: #1d3649;
 }
 .ib {
     display: inline-block
@@ -280,9 +282,10 @@ pre {
 .pitchText {
     font-size: 80%;
     padding-right: 10px;
-    color: yellowgreen;
+    color: #aeaeae;
     max-height: 30px;
     overflow: hidden;
+    margin-bottom: 4px;
 
 }
 .pretext {
@@ -296,4 +299,10 @@ pre {
 }
 .floatRight {
     float: right;
+}
+a, a:visited {
+    color: white;
+}
+.footerBar {
+    background-color: #1d3649;
 }
