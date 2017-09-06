@@ -424,10 +424,15 @@
 			placeholder: "Add in an entry title here",
 			classes: ['rounded', 'uinput']
 		});
-		userInputCat = new InputSurface({
-			type: "select",
-			value: tabMapping
+		userInputCat = new Surface({
+			size: [window.innerWidth -45, 35],
+			classes: ['appDropDown']
 		});
+
+		$select = $('<select />');
+		$.each(tabMapping, function(index, value) {$select.append($('<option>', {index: index, value:value}));});
+		userInputCat.setContent($select.html());
+
 		views.push(userInputTitle);
 		views.push(userInputCat);
 		views.push(new Surface({
