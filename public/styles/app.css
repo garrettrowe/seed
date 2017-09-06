@@ -277,3 +277,23 @@ pre {
 .center {
     margin: 0 auto;
 }
+.pitchText {
+    font-size: 80%;
+    padding-right: 10px;
+    color: yellowgreen;
+    max-height: 30px;
+    overflow: hidden;
+
+}
+.pretext {
+    margin-right: 5px;
+}
+.masterSurface {
+    min-height: 40px;
+}
+.floatLeft {
+    float: left;
+}
+.floatRight {
+    float: right;
+}
