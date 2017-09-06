@@ -150,70 +150,89 @@
 	function setCookie(e,t,n){var o=new Date;o.setDate(o.getDate()+n);var i=escape(t)+(null==n?"":";     expires="+o.toUTCString());document.cookie=e+"="+i}
 	function getCookie(e){var t,n,o,i=document.cookie.split(";");for(t=0;t<i.length;t++)if(n=i[t].substr(0,i[t].indexOf("=")),o=i[t].substr(i[t].indexOf("=")+1),n=n.replace(/^\s+|\s+$/g,""),n==e)return unescape(o)}
 
-	function _pushContentSurface(tabNo, _id, val, pos){	
-		if (tab[tabNo]._dataSource){
-			for (var i = 0; i < tab[tabNo]._dataSource.length; i++){
-				if(tab[tabNo]._dataSource[i].attributes.id == _id){
-					tab[tabNo].remove(i);
-					break;
-				}
-			}
-		}
-		var mastersurface = new ContainerSurface({
-			size: [undefined, 40],
-			attributes : { id: _id,
-			}
-		});
-		mastersurface.addClass('article-cell'); 
-		mastersurface.on('click',function(e){ openModal(e) });
-		
-		var grid = new SequentialLayout({direction:0});	  
-		var views = [];
-		grid.sequenceFrom(views);
-		
-		
-		
-		  
-		var pretext = new Surface({
-			size: [35, undefined],
-			classes: ['appText']
-		});
+    function _pushContentSurface(tabNo, _id, val, pos){
+        if (tab[tabNo]._dataSource){
+            for (var i = 0; i < tab[tabNo]._dataSource.length; i++){
+                if(tab[tabNo]._dataSource[i].attributes.id == _id){
+                    tab[tabNo].remove(i);
+                    break;
+                }
+            }
+        }
 
-		var text = new Surface({
-			classes: ['appText']
-		});
+        var mastersurface = new ContainerSurface({
+            size: [undefined,true],
+            classes: ['masterSurface'],
+            attributes : { id: _id
+            }
+        });
 
-		if(tabNo == tabMapping.indexOf("documentation") ){
-			pretext.setContent('<img src="images/bullet.png">');
-			text.setContent( val.title + "<br>" + val.pitch);
-			mastersurface.setOptions({size: [undefined, 120]});
-		}
-		else if(tabNo == tabMapping.indexOf("user")){
-			if(val.userid == 0){
-				pretext.setContent('<img src="images/bullet.png">');
-			}
-			else{
-				pretext.setContent('<img src="images/userbullet.png">');
-			}
-			text.setContent( val.title );
-		}
-		else{
-			var d = new Date(val.edate)
-			pretext.setContent('<sup>' + (d.getMonth() + 1) + '</sup>/<sub>' + d.getDate() + '</sub>');
-			text.setContent( val.title);
-		}
+        mastersurface.addClass('article-cell');
+        mastersurface.on('click',function(e){ openModal(e) });
 
 
+        var horizontalLayout = new SequentialLayout({direction:0}); //Bullet | Title/Pitch 0= Horizontal Layout
+        var views = [];
+        horizontalLayout.sequenceFrom(views);
 
-			
-		views.push(pretext);
-		views.push(text);
-		mastersurface.add(grid);
-		tab[tabNo].insert(pos, mastersurface, {size: [0, 0]}); 
-	}
+        var bullet = new Surface({
+            size: [true, true],
+            properties:{
+                color:'white'
+            }
+        });
+
+        if(tabNo == tabMapping.indexOf("documentation") ){
+            bullet.setContent('<img src="images/bullet.png">');
+        }
+        else if(tabNo == tabMapping.indexOf("user")){
+            if(val.userid == 0){
+                bullet.setContent('<img src="images/bullet.png">');
+            }
+            else{
+                bullet.setContent('<img src="images/userbullet.png">');
+            }
+
+        }
+        else{
+            var d = new Date(val.edate)
+            bullet.setContent('<sup>' + (d.getMonth() + 1) + '</sup>/<sub>' + d.getDate() + '</sub>');
+        }
 
 
-	function _createContentList(tabNo) {
+        var tpArr = [];
+        var titleAndPitch = new SequentialLayout({direction:1});
+
+        titleAndPitch.sequenceFrom(tpArr);
+
+        var titleText = new Surface({
+            size: [undefined,true],
+            properties:{
+                color:'white'
+            },
+            content: val.title
+        });
+
+        var pitchText = new Surface({
+            classes: ['pitchText'],
+            size: [undefined,true],
+            content: val.pitch
+        });
+
+        tpArr.push(titleText);
+        tpArr.push(pitchText);
+
+
+        views.push(bullet);
+        views.push(titleAndPitch);
+
+        mastersurface.add(horizontalLayout);
+        tab[tabNo].insert(pos, mastersurface, {size: [0, 0]});
+    }
+
+
+
+    function _createContentList(tabNo) {
 		tab[tabNo] = new FlexScrollView({
 			layout: ListLayout,
 			layoutOptions: {
