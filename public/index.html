@@ -163,62 +163,37 @@
             }
         }
 
-        var mastersurface = new ContainerSurface({
+        var mastersurface = new Surface({
             size: [undefined,true],
-            classes: ['masterSurface'],
+            classes: ['masterSurface', 'article-cell'],
             attributes : { id: _id
             }
         });
 
-        mastersurface.addClass('article-cell');
         mastersurface.on('click',function(e){ openModal(e) });
 
-
-        var horizontalLayout = new SequentialLayout({direction:0}); //Bullet | Title/Pitch 0= Horizontal Layout
-        var views = [];
-        horizontalLayout.sequenceFrom(views);
-
-        var bullet = new Surface({
-            size: [37, undefined],
-            classes: ['bullet']
-        });
+        var msContent = "<span class='bullet'>";
 
         if(tabNo == tabMapping.indexOf("documentation") ){
-            bullet.setContent('<i class="fa fa-dot-circle-o"></i>');
+            msContent += '<i class="fa fa-dot-circle-o"></i>';
         }
         else if(tabNo == tabMapping.indexOf("user")){
             if(val.userid == 0){
-                bullet.setContent('<i class="fa fa-dot-circle-o"></i>');
+                msContent += '<i class="fa fa-dot-circle-o"></i>';
             }
             else{
-                bullet.setContent('<i class="fa fa-user-circle-o"></i>');
+                msContent += '<i class="fa fa-user-circle-o"></i>';
             }
 
         }
         else{
             var d = new Date(val.edate)
-            bullet.setContent('<sup>' + (d.getMonth() + 1) + '</sup>/<sub>' + d.getDate() + '</sub>');
+            msContent += '<sup>' + (d.getMonth() + 1) + '</sup>/<sub>' + d.getDate() + '</sub>';
         }
 
-        var titleText = new Surface({
-            size: [undefined,true],
-            classes: ['titleText'],
-            content: val.title + "<div class='pitchText'>" + val.pitch + "</div>"
-        });
 
-        titleText.node = new RenderNode();
-        titleText.mod = new Modifier();
-        titleText.mod.sizeFrom(function(){
-        	target = this._currTarget;
-        	return target ? [undefined,target.offsetHeight] : [undefined,true];
-    	}.bind(titleText));
-
-    	titleText.node.add(titleText.mod).add(titleText);
-
-        views.push(bullet);
-        views.push(titleText.node);
-
-        mastersurface.add(horizontalLayout);
+        msContent +=  "</span><span class='titleText'>" + val.title + "</span><div class='pitchText'>" + val.pitch + "</div>"
+        mastersurface.setContent(msContent);
 
         tab[tabNo].insert(pos, mastersurface, {size: [0, 0]});
     }
