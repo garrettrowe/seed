@@ -268,11 +268,12 @@ pre {
     max-height: fit-content;
     margin-bottom: 4px;
     margin-left:25px;
-
 }
 .bullet{
     color:white;
     margin-right:5px;
+    float:left;
+    height:30px;
 }
 .titleText{
     color:#f9f9fb;
