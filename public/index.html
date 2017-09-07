@@ -162,7 +162,7 @@
         }
 
         var mastersurface = new ContainerSurface({
-            size: [undefined,40],
+            size: [undefined,undefined],
             classes: ['masterSurface'],
             attributes : { id: _id
             }
@@ -177,7 +177,8 @@
         horizontalLayout.sequenceFrom(views);
 
         var bullet = new Surface({
-            size: [35, undefined]
+            size: [37, undefined],
+            classes: ['bullet']
         });
 
         if(tabNo == tabMapping.indexOf("documentation") ){
@@ -199,6 +200,7 @@
 
         var titleText = new Surface({
             size: [undefined,40],
+            classes: ['titleText'],
             content: val.title + "<div class='pitchText'>" + val.pitch + "</div>"
         });
 
