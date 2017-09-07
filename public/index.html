@@ -209,16 +209,16 @@
 
         mastersurface.add(horizontalLayout);
 
-        surface.node = new RenderNode();
-        surface.mod = new Modifier();
-        surface.mod.sizeFrom(function(){
+        mastersurface.node = new RenderNode();
+        mastersurface.mod = new Modifier();
+        mastersurface.mod.sizeFrom(function(){
         	target = this._currTarget;
         	return target ? [undefined,target.offsetHeight] : [undefined,true];
     	}.bind(mastersurface));
 
-    	surface.node.add(surface.mod).add(mastersurface);
+    	mastersurface.node.add(mastersurface.mod).add(mastersurface);
 
-        tab[tabNo].insert(pos, surface.node, {size: [0, 0]});
+        tab[tabNo].insert(pos, mastersurface.node, {size: [0, 0]});
     }
 
 
