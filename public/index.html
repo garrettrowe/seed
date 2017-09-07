@@ -783,12 +783,6 @@
 	_createLightbox();
 	
 
-	var temp = new PouchDB('a_metrics').destroy().then(function () {
-	  // database destroyed
-	}).catch(function (err) {
-	  // error occurred
-	});
-
 	pd = new PouchDB('battle', {auto_compaction: true, size: 50});
 	mpd = new PouchDB('a_metrics', {auto_compaction: true});
 	
