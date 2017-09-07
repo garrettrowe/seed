@@ -49,32 +49,6 @@
 	var StateModifier = famous.modifiers.StateModifier;
 	var TransitionableTransform = famous.transitions.TransitionableTransform;
 	var Scrollview  = famous.views.Scrollview;
-
-	define(function(require, exports, module) {
-    var Surface = require('famous/core/Surface');
-    var Entity = require('famous/core/Entity');
-
-    function AutoSurface(options) {
-	        Surface.apply(this, arguments);
-	        this.hasTrueSize = false;
-	        this._superCommit = Surface.prototype.commit;
-	    }
-
-	    AutoSurface.prototype = Object.create(Surface.prototype);
-
-	    AutoSurface.prototype.constructor = AutoSurface;
-
-	    AutoSurface.prototype.commit = function commit(context) {
-	        this._superCommit(context);
-	        if (!this.hasTrueSize) {
-	            this.trueHeight = Entity.get(this.id)._currTarget.clientHeight;
-	            this.setSize([undefined,this.trueHeight]);
-	            this.hasTrueSize = true;
-	        }
-	    }
-
-	    module.exports = AutoSurface;
-	});
 	
 	var searchFields = ['calendar.title', 'calendar.content', 'documentation.title','documentation.pitch', 'documentation.content', 'user.title', 'user.content'];
 	var tabMapping = ['calendar', 'documentation', 'user'];
@@ -189,7 +163,7 @@
             }
         }
 
-        var mastersurface = new AutoSurface({
+        var mastersurface = new ContainerSurface({
             size: [undefined,true],
             classes: ['masterSurface'],
             attributes : { id: _id
@@ -232,12 +206,21 @@
             content: val.title + "<div class='pitchText'>" + val.pitch + "</div>"
         });
 
+        titleText.node = new RenderNode();
+        titleText.mod = new Modifier();
+        titleText.mod.sizeFrom(function(){
+        	target = this._currTarget;
+        	return target ? [undefined,target.offsetHeight] : [undefined,true];
+    	}.bind(titleText));
+
+    	titleText.node.add(titleText.mod).add(titleText);
+
         views.push(bullet);
-        views.push(titleText);
+        views.push(titleText.node);
 
         mastersurface.add(horizontalLayout);
 
-        tab[tabNo].insert(pos, mastersurface, {size: [0, 0]});
+        tab[tabNo].insert(pos, mastersurface.node, {size: [0, 0]});
     }
 
 
