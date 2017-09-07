@@ -154,10 +154,12 @@
     function _pushContentSurface(tabNo, _id, val, pos){
         if (tab[tabNo]._dataSource){
             for (var i = 0; i < tab[tabNo]._dataSource.length; i++){
-                if(tab[tabNo]._dataSource[i].attributes.id == _id){
-                    tab[tabNo].remove(i);
-                    break;
-                }
+            	try{
+	                if(tab[tabNo]._dataSource[i].attributes.id == _id){
+	                    tab[tabNo].remove(i);
+	                    break;
+	                }
+            	}catch(fail){}
             }
         }
 
