@@ -550,7 +550,7 @@
 					modalTitle.setContent("<h3>" + res.rows[0].doc[i].title + "</h3><hr width=92%>" );
 					modal.setContent("<div>" + res.rows[0].doc[i].content + "</div>");
 
-					rpd.query('ratings/ratings', {group: true }).then(function (res) {
+					rpd.query('rating', {group: true }).then(function (res) {
 					var w = undefined;
 					}).catch(function (err) {
 					  // some error
