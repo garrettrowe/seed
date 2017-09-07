@@ -245,7 +245,7 @@
 		views.push(new Surface({
 			size: [270, 80],
 			classes: ['help-cell'],
-			content: "<div class='helpPics'><i class='fa fa-book fa-2x'></i></div><div style='width:200px; float:left;'>Event modules.  Find available content to propose for a new event.</div>"
+			content: "<div class='helpPics'><i class='fa fa-book fa-2x'></i></div><div style='width:200px; float:left;'>IBM Points of View.  POV's created specific to the communications market.</div>"
 		}));
 		views.push(new Surface({
 			size: [270, 100],
@@ -782,6 +782,13 @@
 	_createHelp();
 	_createLightbox();
 	
+
+	new PouchDB('a_metrics').destroy().then(function () {
+	  // database destroyed
+	}).catch(function (err) {
+	  // error occurred
+	})
+
 	pd = new PouchDB('battle', {auto_compaction: true, size: 50});
 	mpd = new PouchDB('a_metrics', {auto_compaction: true});
 	
@@ -799,7 +806,7 @@
 		}else{
 			for (var i = 0; i < tab.length; i++){
 				tab[i].push(new Surface({
-					size: [undefined, undefined],
+					classes: ['loadSpinner'],
 					content: '<i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>'
 				}));
 			}
