@@ -200,7 +200,7 @@
         }
 
         var titleText = new Surface({
-            size: [undefined,40],
+            size: [undefined,undefined],
             classes: ['titleText'],
             content: val.title + "<div class='pitchText'>" + val.pitch + "</div>"
         });
@@ -208,7 +208,14 @@
         views.push(bullet);
         views.push(titleText);
 
-        mastersurface.add(horizontalLayout);
+        titleMod = new Modifier({ origin: [0.5,0.5] });
+
+		titleMod.sizeFrom(function(){
+    		contextSize   = titleText.getSize() ;
+    		return [undefined,contextSize[1] ] ;
+		});
+
+        mastersurface.add(titleMod).add(horizontalLayout);
         tab[tabNo].insert(pos, mastersurface, {size: [0, 0]});
     }
 
