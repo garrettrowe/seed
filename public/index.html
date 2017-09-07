@@ -419,7 +419,7 @@
 		userInputCat.setContent($select.prop('outerHTML'));
 
 		views.push(userInputTitle);
-		views.push(userInputCat);
+		//views.push(userInputCat);
 		views.push(new Surface({
 			size: [5, 5]
 		}));
@@ -732,11 +732,11 @@
 		lbsync.on('end', function (data) {
 			var velocity = data.velocity[0];
 			currentPos.set(origpos);
-			if (velocity > .7) {
+			if (velocity > .8) {
 				lightbox.setOptions({outTransform: Transform.translate(500,0,500)});
 				closeLightbox();
 			}  
-			else if  (velocity < -.7) {
+			else if  (velocity < -.8) {
 				lightbox.setOptions({outTransform: Transform.translate(-500,0,500)});
 				closeLightbox();
 			}    
@@ -752,7 +752,7 @@
 
 			var doc = {
 			  "_id": docid,
-			  $item : {
+			  "user" : {
 				"title": userInputTitle.getValue(),
 				"pitch": "",
 				"content": tinymce.activeEditor.getContent({format : 'raw'}),
