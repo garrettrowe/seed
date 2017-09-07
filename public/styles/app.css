@@ -279,7 +279,7 @@ pre {
     margin-right: 5px;
 }
 .masterSurface {
-    min-height: 40px;
+    max-height: fit-content;
 }
 .floatLeft {
     float: left;

@@ -162,7 +162,7 @@
         }
 
         var mastersurface = new ContainerSurface({
-            size: [undefined,undefined],
+            size: [undefined,40],
             classes: ['masterSurface'],
             attributes : { id: _id
             }
@@ -183,6 +183,7 @@
 
         if(tabNo == tabMapping.indexOf("documentation") ){
             bullet.setContent('<i class="fa fa-dot-circle-o"></i>');
+            mastersurface.setOptions({size: [undefined, 300]});
         }
         else if(tabNo == tabMapping.indexOf("user")){
             if(val.userid == 0){
