@@ -63,6 +63,7 @@
 	var modal = undefined;
 	var modalTitle = undefined;
 	var modalRating = undefined;
+	var ratingCountSurface = undefined;
 	var userInputTitle = undefined;
 	var userInputContent = undefined;
 	var submitState = new Modifier({});
@@ -85,6 +86,7 @@
 	var url = "https://355bd056-cc3e-4264-ad1b-e9c8af4db98a-bluemix:85726babe099aad16cc4abde52b4de79b93cfd08d094633cec2ab0519287ecb5@355bd056-cc3e-4264-ad1b-e9c8af4db98a-bluemix.cloudant.com/";
 	var currentRating = 0;
 	var maxRating = 5;
+	var ratingCount;
     var stars = [];
     var userid = undefined;
 
@@ -550,8 +552,9 @@
 					modalTitle.setContent("<h3>" + res.rows[0].doc[i].title + "</h3><hr width=92%>" );
 					modal.setContent("<div>" + res.rows[0].doc[i].content + "</div>");
 
-					rpd.query('rating', {group: true }).then(function (res) {
-					var w = undefined;
+					rpd.query('rating', {group: true, key: res.rows[0].id }).then(function (res) {
+						currentRating = Math.round(res.rows[0].value.sum / res.rows[0].value.count);
+						ratingCountSurface.setContent(es.rows[0].value.count);
 					}).catch(function (err) {
 					  // some error
 					});
@@ -665,6 +668,11 @@
 			        attachStarEvents(star);
 			        stars.push(star);
 		}
+		ratingCountSurface = new Surface({
+			size: [25, 25],
+			classes: ['ratingCount']}
+		);
+		stars.push(ratingCountSurface);
 		renderNode.add(grid);
 		modalRating.add(renderNode);
 		return modalRating;
