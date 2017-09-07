@@ -162,7 +162,7 @@
         }
 
         var mastersurface = new ContainerSurface({
-            size: [undefined,40],
+            size: [undefined,true],
             classes: ['masterSurface'],
             attributes : { id: _id
             }
@@ -199,7 +199,7 @@
         }
 
         var titleText = new Surface({
-            size: [undefined,undefined],
+            size: [undefined,true],
             classes: ['titleText'],
             content: val.title + "<div class='pitchText'>" + val.pitch + "</div>"
         });
@@ -207,10 +207,18 @@
         views.push(bullet);
         views.push(titleText);
 
-
         mastersurface.add(horizontalLayout);
-        mastersurface.setProperties({'max-height':'fit-content'});
-        tab[tabNo].insert(pos, mastersurface, {size: [0, 0]});
+
+        surface.node = new RenderNode();
+        surface.mod = new Modifier();
+        surface.mod.sizeFrom(function(){
+        	target = this._currTarget;
+        	return target ? [undefined,target.offsetHeight] : [undefined,true];
+    	}.bind(mastersurface));
+
+    	surface.node.add(surface.mod).add(mastersurface);
+
+        tab[tabNo].insert(pos, surface.node, {size: [0, 0]});
     }
 
 
