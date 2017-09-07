@@ -89,7 +89,20 @@
 
     
     function saveStars(rating, docid) {  
-    	rpd.post({"_id": userid + docid,"time_stamp": new Date(), "userid" : userid , "docid": docid, "rating": rating});			
+		rpd.get(userid + docid).then(function(doc) {
+		  return rpd.put({
+		    _id: 'mydoc',
+		    _rev: doc._rev,
+		    "time_stamp": new Date(),
+		    "userid" : userid,
+		    "docid": docid,
+		    "rating": rating
+		  });
+		}).then(function(response) {
+		  // handle response
+		}).catch(function (err) {
+		  rpd.post({"_id": userid + docid,"time_stamp": new Date(), "userid" : userid , "docid": docid, "rating": rating});	
+		});
     };
 
     function attachStarEvents(star) {
@@ -535,6 +548,13 @@
 				if (typeof res.rows[0].doc[i] === "object"){
 					modalTitle.setContent("<h3>" + res.rows[0].doc[i].title + "</h3><hr width=92%>" );
 					modal.setContent("<div>" + res.rows[0].doc[i].content + "</div>");
+
+					rpd.query('ratings/ratings', {group: true }).then(function (res) {
+					var w = undefined;
+					}).catch(function (err) {
+					  // some error
+					});
+
 				}
 			}); 
 		});
