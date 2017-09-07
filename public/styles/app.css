@@ -265,8 +265,7 @@ pre {
     font-size: 80%;
     padding-right: 10px;
     color: #aeaeae;
-    max-height: 30px;
-    overflow: hidden;
+    max-height: fit-content;
     margin-bottom: 4px;
 
 }
