@@ -575,7 +575,7 @@
 			}
 		});
 
-		var grid = new HeaderFooterLayout({headerSize: 60,footerSize: 30}); 
+		var grid = new HeaderFooterLayout({headerSize: true,footerSize: 30}); 
 
 		grid.header.add(_createTitle());
 		grid.content.add(modalscrollview.contentscroll);
@@ -584,7 +584,7 @@
 	}
 	function _createTitle(mcontent) {
 		modalTitle = new Surface({
-			size: [undefined, 60],
+			size: [undefined, true],
 			properties:{
 				zIndex: '51'
 			},
