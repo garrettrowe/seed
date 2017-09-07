@@ -209,7 +209,7 @@
 
 
         mastersurface.add(horizontalLayout);
-        mastersurface.setProperties({max-height:'fit-content'});
+        mastersurface.setProperties({'max-height':'fit-content'});
         tab[tabNo].insert(pos, mastersurface, {size: [0, 0]});
     }
 
@@ -855,7 +855,7 @@
 	}).on('paused', function (info) {
 		document.getElementById("con" + index).innerHTML = '<i class="fa fa-ban icon-red"></i>';
 	}).on('active', function (info) {
-		document.getElementById("con" + index).innerHTML = '<i class="fa fa-circle-o-notch fa-spin fa-fw icon-default"></i>';
+		document.getElementById("con" + index).innerHTML = '<i class="fa fa-cog fa-spin fa-fw icon-default"></i>';
 	}).catch(console.log.bind(console));
 	});
 
