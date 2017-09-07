@@ -183,7 +183,6 @@
 
         if(tabNo == tabMapping.indexOf("documentation") ){
             bullet.setContent('<i class="fa fa-dot-circle-o"></i>');
-            //mastersurface.setOptions({size: [undefined, 300]});
         }
         else if(tabNo == tabMapping.indexOf("user")){
             if(val.userid == 0){
@@ -208,14 +207,9 @@
         views.push(bullet);
         views.push(titleText);
 
-        titleMod = new Modifier();
 
-		titleMod.sizeFrom(function(){
-    		contextSize   = titleText.getSize() ;
-    		return [undefined,contextSize[1] ] ;
-		});
-
-        mastersurface.add(titleMod).add(horizontalLayout);
+        mastersurface.add(horizontalLayout);
+        mastersurface.setProperties({max-height:'fit-content'});
         tab[tabNo].insert(pos, mastersurface, {size: [0, 0]});
     }
 
