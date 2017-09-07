@@ -267,10 +267,12 @@ pre {
     color: #aeaeae;
     max-height: fit-content;
     margin-bottom: 4px;
+    margin-left:30px;
 
 }
 .bullet{
     color:white;
+    margin:3px;
 }
 .titleText{
     color:#f9f9fb;
