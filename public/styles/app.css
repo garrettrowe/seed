@@ -152,7 +152,7 @@ span.v-text {
     font-weight: 700;
     text-align: center;
     line-height: 50px;
-    color: #a6266e;
+    color: #4178be;
     border-top: #fff solid 1px
 }
 .tabbutoff {
@@ -263,11 +263,11 @@ pre {
 }
 .pitchText {
     font-size: 80%;
-    padding-right: 10px;
+    padding-right: 5px;
     color: #aeaeae;
     max-height: fit-content;
     margin-bottom: 4px;
-    margin-left:30px;
+    margin-left:25px;
 
 }
 .bullet{
