@@ -177,10 +177,7 @@
         horizontalLayout.sequenceFrom(views);
 
         var bullet = new Surface({
-            size: [35, undefined],
-            properties:{
-                color:'white'
-            }
+            size: [35, undefined]
         });
 
         if(tabNo == tabMapping.indexOf("documentation") ){
@@ -200,32 +197,13 @@
             bullet.setContent('<sup>' + (d.getMonth() + 1) + '</sup>/<sub>' + d.getDate() + '</sub>');
         }
 
-
-        var tpArr = [];
-        var titleAndPitch = new SequentialLayout({direction:1});
-
-        titleAndPitch.sequenceFrom(tpArr);
-
         var titleText = new Surface({
             size: [undefined,40],
-            properties:{
-                color:'#f9f9fb'
-            },
-            content: val.title
+            content: val.title + "<div class='pitchText'>" + val.pitch + "</div>"
         });
-
-        var pitchText = new Surface({
-            classes: ['pitchText'],
-            size: [undefined,1],
-            content: val.pitch
-        });
-
-        tpArr.push(titleText);
-        tpArr.push(pitchText);
-
 
         views.push(bullet);
-        views.push(titleAndPitch);
+        views.push(titleText);
 
         mastersurface.add(horizontalLayout);
         tab[tabNo].insert(pos, mastersurface, {size: [0, 0]});

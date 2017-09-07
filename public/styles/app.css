@@ -269,6 +269,12 @@ pre {
     margin-bottom: 4px;
 
 }
+.bullet{
+    color:white;
+}
+.titleText{
+    color:#f9f9fb;
+}
 .pretext {
     margin-right: 5px;
 }
