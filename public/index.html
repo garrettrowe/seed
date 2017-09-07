@@ -182,7 +182,7 @@
                 msContent += '<i class="fa fa-dot-circle-o"></i>';
             }
             else{
-                msContent += '<i class="fa fa-user-circle-o"></i>';
+                msContent += '<i class="fa fa-user"></i>';
             }
 
         }
@@ -250,7 +250,7 @@
 		views.push(new Surface({
 			size: [270, 100],
 			classes: ['help-cell'],
-			content: "<div class='helpPics'><i class='fa fa-cubes fa-2x'></i></div><div style='width:200px; float:left;'>User Feedback and Input.  Propose new events and patterns.</div>"
+			content: "<div class='helpPics'><i class='fa fa-cubes fa-2x'></i></div><div style='width:200px; float:left;'>Repeatable patterns and use cases.  Industry-specific use patterns related to POV's</div>"
 		}));
 		views.push(new Surface({
 			size: [270, 50],
@@ -282,7 +282,7 @@
 			size: [20, undefined]
 		});
 		var addContent = new Surface({
-			content: '<i class="fa fa-plus-circle fa-2x"></i>',
+			content: '<i class="fa fa-user-plus fa-2x"></i>',
             classes: ['icon-default', 'button-padding'],
 			size: [40, undefined]
 		});
@@ -424,7 +424,7 @@
 			size: [5, 5]
 		}));
 		userInputContent = new Surface({
-			size: [window.innerWidth -45, window.innerHeight - 160],
+			size: [window.innerWidth -45, window.innerHeight - 120],
 			properties:{
 				backgroundColor: 'white',
 				overflow: 'auto',

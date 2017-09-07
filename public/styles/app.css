@@ -59,7 +59,7 @@ html {
     -webkit-overflow-scrolling: touch
 }
 .article-cell {
-    padding: 5px;
+    padding-bottom: 5px;
     font-family: arial;
     font-weight: 700;
     font-size: 12pt;
@@ -272,7 +272,7 @@ pre {
 }
 .bullet{
     color:white;
-    margin:3px;
+    margin-right:5px;
 }
 .titleText{
     color:#f9f9fb;
