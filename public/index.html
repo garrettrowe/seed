@@ -14,6 +14,7 @@
 		<link rel="apple-touch-startup-image" href="images/splash.png">
 
 		<link rel="stylesheet" type="text/css" href="styles/app.css" />
+        <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css"/>
 		<script type="text/javascript" src="lib/c.js"></script>
 		<script type="text/javascript" src="lib/jq.js"></script>
 		<script type="text/javascript" src="lib/mce.js"></script>
@@ -183,14 +184,14 @@
         });
 
         if(tabNo == tabMapping.indexOf("documentation") ){
-            bullet.setContent('<img src="images/bullet.png">');
+            bullet.setContent('<i class="fa fa-dot-circle-o"></i>');
         }
         else if(tabNo == tabMapping.indexOf("user")){
             if(val.userid == 0){
-                bullet.setContent('<img src="images/bullet.png">');
+                bullet.setContent('<i class="fa fa-dot-circle-o"></i>');
             }
             else{
-                bullet.setContent('<img src="images/userbullet.png">');
+                bullet.setContent('<i class="fa fa-user-circle-o"></i>');
             }
 
         }
@@ -272,17 +273,17 @@
 		views.push(new Surface({
 			size: [270, 80],
 			classes: ['help-cell'],
-			content: "<div class='helpPics'><img src='./images/calendar.png'></div><div style='width:200px; float:left;'>Events Calendar. View upcoming and historical events.</div>"
+			content: "<div class='helpPics'><i class='fa fa-calendar fa-2x'></i></div><div style='width:200px; float:left;'>Events Calendar. View upcoming and historical events.</div>"
 		}));
 		views.push(new Surface({
 			size: [270, 80],
 			classes: ['help-cell'],
-			content: "<div class='helpPics'><img src='./images/documentation.png'></div><div style='width:200px; float:left;'>Event modules.  Find available content to propose for a new event.</div>"
+			content: "<div class='helpPics'><i class='fa fa-book fa-2x'></i></div><div style='width:200px; float:left;'>Event modules.  Find available content to propose for a new event.</div>"
 		}));
 		views.push(new Surface({
 			size: [270, 100],
 			classes: ['help-cell'],
-			content: "<div class='helpPics'><img src='./images/user.png'></div><div style='width:200px; float:left;'>User Feedback and Input.  Propose new events and patterns.</div>"
+			content: "<div class='helpPics'><i class='fa fa-cubes fa-2x'></i></div><div style='width:200px; float:left;'>User Feedback and Input.  Propose new events and patterns.</div>"
 		}));
 		views.push(new Surface({
 			size: [270, 50],
@@ -309,16 +310,19 @@
 		var views = [];
 		grid.sequenceFrom(views);
 		var connectIcons = new Surface({
-			content: '<img style="margin: 2px 0px 0px 4px;" id="con0" src="../images/disconnected.png">',
+			content: '<i class="fa fa-ban icon-red"></i>',
+            attributes: {id: 'con0'},
 			size: [20, undefined]
 		});
 		var addContent = new Surface({
-			content: '<img style="margin: 5px 5px 0px 10px;" src="images/plus.png">',
+			content: '<i class="fa fa-plus-circle fa-2x"></i>',
+            classes: ['icon-default', 'plus-button-padding'],
 			size: [40, undefined]
 		});
 		addContent.on('click',function(e){ openUsrInput(e) });
 		var question = new Surface({
-			content: '<img style="margin: 5px 10px 0px 5px;" src="images/question.png">',
+			content: '<i class="fa fa-bars fa-2x"></i>',
+            classes: ['icon-default'],
 			size: [40, undefined]
 		});
 		question.on('click',function(e){ openQuestion() });
@@ -486,12 +490,12 @@
 		views2.push(new Surface({
 			size: [50, 45],
 			classes: ['appMargin'],
-			content: "<img onclick='javascript:closeUsrInput();'  src='./images/cancel.png'>" 
+			content: "<i class='fa fa-times-circle fa-3x' onclick='javascript:closeUsrInput();'></i>"
 		}));
 		views2.push(new Surface({
 			size: [60, 45],
 			classes: ['appMargin'],
-			content: "<img onclick='javascript:submitUsrInput();'  src='./images/ok.png'>"
+			content: "<i class='fa fa-check-circle fa-3x' onclick='javascript:submitUsrInput();'></i>"
 		}));			
 		views.push(anode.add(grid2));
 		usrInput.add(grid);
@@ -501,9 +505,9 @@
         tb = new TabBar({
             size: [undefined, 50]
         });
-        tb.defineSection(0,{content: '', onClasses: ['tabbuton', 'tab1'], offClasses:['tabbutoff', 'tab1off']});
-        tb.defineSection(1,{content: '', onClasses: ['tabbuton', 'tab2'], offClasses:['tabbutoff', 'tab2off']});
-		tb.defineSection(2,{content: '', onClasses: ['tabbuton', 'tab3'], offClasses:['tabbutoff', 'tab3off']});
+        tb.defineSection(0,{content: '<i class="fa fa-calendar fa-2x"></i>', onClasses: ['tabbuton'], offClasses:['tabbutoff']});
+        tb.defineSection(1,{content: '<i class="fa fa-book fa-2x"></i>', onClasses: ['tabbuton'], offClasses:['tabbutoff']});
+		tb.defineSection(2,{content: '<i class="fa fa-cubes fa-2x"></i>', onClasses: ['tabbuton'], offClasses:['tabbutoff']});
         tb.select(0);
         ehTab.subscribe(tb);
         ehTab.on('select', function(button) {
@@ -829,7 +833,7 @@
 			for (var i = 0; i < tab.length; i++){
 				tab[i].push(new Surface({
 					size: [undefined, undefined],
-					content: "<br><br><center><img src='./images/loading.gif'></center>" 
+					content: '<i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>'
 				}));
 			}
 		}
@@ -844,7 +848,7 @@
 	rdbs.map(function (index){
 		return pd.sync(remotereps[index], {live: true, retry: true, since: 0, back_off_function: function (delay) {return 10000;}}
 		).on('error', function (err) {
-		document.getElementById("con" + index).src = "../images/disconnected.png";
+		document.getElementById("con" + index).innerHTML = '<i class="fa fa-ban fa-spin fa-fw icon-default"></i>';
 	}).on('change', function(info) {
 		Promise.all(info.change.docs.map(function (i) {
 	    if (i._deleted) {
@@ -867,9 +871,9 @@
 		}
 		})).catch(console.log.bind(console));
 	}).on('paused', function (info) {
-		document.getElementById("con" + index).src = "../images/disconnected.png";
+		document.getElementById("con" + index).innerHTML = '<i class="fa fa-ban icon-red"></i>';
 	}).on('active', function (info) {
-		document.getElementById("con" + index).src = "../images/connected.png";
+		document.getElementById("con" + index).innerHTML = '<i class="fa fa-circle-o-notch fa-spin fa-fw icon-default"></i>';
 	}).catch(console.log.bind(console));
 	});
 
