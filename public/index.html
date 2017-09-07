@@ -49,6 +49,32 @@
 	var StateModifier = famous.modifiers.StateModifier;
 	var TransitionableTransform = famous.transitions.TransitionableTransform;
 	var Scrollview  = famous.views.Scrollview;
+
+	define(function(require, exports, module) {
+    var Surface = require('famous/core/Surface');
+    var Entity = require('famous/core/Entity');
+
+    function AutoSurface(options) {
+	        Surface.apply(this, arguments);
+	        this.hasTrueSize = false;
+	        this._superCommit = Surface.prototype.commit;
+	    }
+
+	    AutoSurface.prototype = Object.create(Surface.prototype);
+
+	    AutoSurface.prototype.constructor = AutoSurface;
+
+	    AutoSurface.prototype.commit = function commit(context) {
+	        this._superCommit(context);
+	        if (!this.hasTrueSize) {
+	            this.trueHeight = Entity.get(this.id)._currTarget.clientHeight;
+	            this.setSize([undefined,this.trueHeight]);
+	            this.hasTrueSize = true;
+	        }
+	    }
+
+	    module.exports = AutoSurface;
+	});
 	
 	var searchFields = ['calendar.title', 'calendar.content', 'documentation.title','documentation.pitch', 'documentation.content', 'user.title', 'user.content'];
 	var tabMapping = ['calendar', 'documentation', 'user'];
@@ -163,7 +189,7 @@
             }
         }
 
-        var mastersurface = new ContainerSurface({
+        var mastersurface = new AutoSurface({
             size: [undefined,true],
             classes: ['masterSurface'],
             attributes : { id: _id
@@ -211,16 +237,7 @@
 
         mastersurface.add(horizontalLayout);
 
-        mastersurface.node = new RenderNode();
-        mastersurface.mod = new Modifier();
-        mastersurface.mod.sizeFrom(function(){
-        	target = this._currTarget;
-        	return target ? [undefined,target.offsetHeight] : [undefined,true];
-    	}.bind(mastersurface));
-
-    	mastersurface.node.add(mastersurface.mod).add(mastersurface);
-
-        tab[tabNo].insert(pos, mastersurface.node, {size: [0, 0]});
+        tab[tabNo].insert(pos, mastersurface, {size: [0, 0]});
     }
 
 
