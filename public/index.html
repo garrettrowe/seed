@@ -283,13 +283,13 @@
 		});
 		var addContent = new Surface({
 			content: '<i class="fa fa-plus-circle fa-2x"></i>',
-            classes: ['icon-default', 'plus-button-padding'],
+            classes: ['icon-default', 'button-padding'],
 			size: [40, undefined]
 		});
 		addContent.on('click',function(e){ openUsrInput(e) });
 		var question = new Surface({
 			content: '<i class="fa fa-bars fa-2x"></i>',
-            classes: ['icon-default'],
+            classes: ['icon-default', 'button-padding'],
 			size: [40, undefined]
 		});
 		question.on('click',function(e){ openQuestion() });
