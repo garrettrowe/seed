@@ -269,6 +269,11 @@ pre {
     margin-bottom: 4px;
     margin-left:25px;
 }
+.ratingCount{
+    font-size: 80%;
+    padding-top: 3px;
+    color: #aeaeae;
+}
 .bullet{
     color:white;
     margin-right:5px;
