@@ -3,8 +3,6 @@
 // app.js
 
 var express = require('express'),
-    routes = require('./routes'),
-    user = require('./routes/user'),
     http = require('http'),
     path = require('path'),
     fs = require('fs');
@@ -102,8 +100,6 @@ function initDBConnection() {
 }
 
 initDBConnection();
-
-app.get('/', routes.index);
 
 app.get('/', function(req, res){
 	res.sendfile('public/index.html');
