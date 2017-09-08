@@ -81,22 +81,18 @@ html {
     display:none;
 }
 .helpCloseButton{
-    textAlign : center;
-    paddingTop: 37px;
-    backgroundImage: url("./images/cancel.png");
-    backgroundRepeat: no-repeat;
-    backgroundPosition: center top;
+    text-align : center;
+    padding-top: 37px;
+    background: url(../images/cancel.png) no-repeat center top;
 }
 
 @media only screen 
 and (min-device-width : 414px) 
 and (max-device-width : 736px) { 
 .helpCloseSwipe{
-    textAlign : center;
-    paddingTop: 37px;
-    backgroundImage: url("./images/swipe.png");
-    backgroundRepeat: no-repeat;
-    backgroundPosition: center top;
+    text-align : center;
+    padding-top: 37px;
+    background: url(../images/swipe.png) no-repeat center top;
 }
 .helpCloseButton{
     display:none;
@@ -107,11 +103,9 @@ and (max-device-width : 736px) {
 and (min-device-width : 320px) 
 and (max-device-width : 568px) {
 .helpCloseSwipe{
-    textAlign : center;
-    paddingTop: 37px;
-    backgroundImage: url("./images/swipe.png");
-    backgroundRepeat: no-repeat;
-    backgroundPosition: center top;
+    text-align : center;
+    padding-top: 37px;
+    background: url(../images/swipe.png) no-repeat center top;
 }
 .helpCloseButton{
     display:none;
@@ -122,11 +116,9 @@ and (max-device-width : 568px) {
 and (min-device-width : 375px) 
 and (max-device-width : 667px) {
 .helpCloseSwipe{
-    textAlign : center;
-    paddingTop: 37px;
-    backgroundImage: url("./images/swipe.png");
-    backgroundRepeat: no-repeat;
-    backgroundPosition: center top;
+    text-align : center;
+    padding-top: 37px;
+    background: url(../images/swipe.png) no-repeat center top;
 }
 .helpCloseButton{
     display:none;
@@ -299,9 +291,7 @@ pre {
     float: left;
     margin-left: 5px
 }
-.helpswipe {
-    background: url(../images/swipe.png) no-repeat center top;
-}
+
 .help-cell {
     padding: 5px;
     font-family: arial;
