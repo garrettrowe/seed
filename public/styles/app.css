@@ -77,6 +77,63 @@ html {
     -webkit-border-radius: 10px
 }
 
+.helpCloseSwipe{
+    display:none;
+}
+.helpCloseButton{
+    textAlign : center;
+    paddingTop: 37px;
+    backgroundImage: url("./images/cancel.png");
+    backgroundRepeat: no-repeat;
+    backgroundPosition: center top;
+}
+
+@media only screen 
+and (min-device-width : 414px) 
+and (max-device-width : 736px) { 
+.helpCloseSwipe{
+    textAlign : center;
+    paddingTop: 37px;
+    backgroundImage: url("./images/swipe.png");
+    backgroundRepeat: no-repeat;
+    backgroundPosition: center top;
+}
+.helpCloseButton{
+    display:none;
+}
+}
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) {
+.helpCloseSwipe{
+    textAlign : center;
+    paddingTop: 37px;
+    backgroundImage: url("./images/swipe.png");
+    backgroundRepeat: no-repeat;
+    backgroundPosition: center top;
+}
+.helpCloseButton{
+    display:none;
+}
+}
+
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px) {
+.helpCloseSwipe{
+    textAlign : center;
+    paddingTop: 37px;
+    backgroundImage: url("./images/swipe.png");
+    backgroundRepeat: no-repeat;
+    backgroundPosition: center top;
+}
+.helpCloseButton{
+    display:none;
+}
+}
+
+
 .fa.closeButton{
     position: absolute;
     right: -4px;

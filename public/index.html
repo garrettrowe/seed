@@ -282,15 +282,8 @@
 		}));
 		views.push(new Surface({
 			size: [270, 50],
-			properties:{
-				textAlign : 'center',
-				paddingTop: '37px',
-				backgroundImage: 'url("./images/swipe.png")',
-				backgroundRepeat: 'no-repeat',
-				backgroundPosition: 'center top',
-			},
 			classes: ['help-cell'],
-			content: "Swipe to close this screen"
+			content: "<div class=''helpCloseButton' onclick='javascript:submitUsrInput();'></div>div class=''helpCloseSwipe>Swipe to close</div>"
 		}));
 		questionSurface.add(grid);
 	}
