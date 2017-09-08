@@ -192,8 +192,7 @@
         var mastersurface = new Surface({
             size: [undefined,true],
             classes: ['masterSurface', 'article-cell'],
-            attributes : { id: _id
-            }
+            attributes : { id: _id}
         });
 
         mastersurface.on('click',function(e){ openModal(e) });
@@ -435,17 +434,13 @@
 			placeholder: "Add in an entry title here",
 			classes: ['rounded', 'uinput']
 		});
-		userInputCat = new Surface({
-			size: [window.innerWidth -45, 35],
-			classes: ['appDropDown']
-		});
 
 		$select = $('<select id="userInputDrop" />');
 		$.each(tabMapping, function(index, value) {$select.append($('<option>', {text: value, value:value}));});
 		userInputCat.setContent($select.prop('outerHTML'));
 
 		views.push(userInputTitle);
-		//views.push(userInputCat);
+
 		views.push(new Surface({
 			size: [5, 5]
 		}));
@@ -457,7 +452,8 @@
 				border: '1px solid black',
 				WebkitOverflowScrolling : 'touch'
 			},
-			content: "<div class='editme' id='tinymceeditwindow'></div>"
+			classes: ['editme'],
+			attributes : { id: 'tinymceeditwindow'}
 		});
 
 		views.push(userInputContent);
