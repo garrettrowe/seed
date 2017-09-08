@@ -84,6 +84,7 @@ html {
     text-align : center;
     padding-top: 37px;
     background: url(../images/cancel.png) no-repeat center top;
+    display:block;
 }
 
 @media only screen 
@@ -93,6 +94,7 @@ and (max-device-width : 736px) {
     text-align : center;
     padding-top: 37px;
     background: url(../images/swipe.png) no-repeat center top;
+    display:block;
 }
 .helpCloseButton{
     display:none;
@@ -106,6 +108,7 @@ and (max-device-width : 568px) {
     text-align : center;
     padding-top: 37px;
     background: url(../images/swipe.png) no-repeat center top;
+    display:block;
 }
 .helpCloseButton{
     display:none;
@@ -119,6 +122,7 @@ and (max-device-width : 667px) {
     text-align : center;
     padding-top: 37px;
     background: url(../images/swipe.png) no-repeat center top;
+    display:block;
 }
 .helpCloseButton{
     display:none;
