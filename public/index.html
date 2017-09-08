@@ -143,6 +143,9 @@
       });
     }
 
+    function pSetRating(value){
+    	setTimeout(setRating(value, false), 1000);
+    }
 
     function setRating(value, doCallback) {
       if (value && value < 0 || value > maxRating) { return; }
@@ -561,17 +564,20 @@
 					modal.setContent("<div>" + res.rows[0].doc[i].content + "</div>");
 
 					ratingCountSurface.setContent("0 reviews");
-					setRating(0, false);
-
+					
 					rpd.query('rating', {group: true, key: res.rows[0].id }).then(function (res) {
-						setRating(Math.round(res.rows[0].value.sum / res.rows[0].value.count), false);
+						currentRating = Math.round(res.rows[0].value.sum / res.rows[0].value.count);
+						rpd.get(userid + res.rows[0].id).then(function(response) {
+							pSetRating(response.rating, false);
+						}).catch(function (err) {
+							pSetRating(currentRating, false);
+						});
 						ratingCountSurface.setContent("" + pround(res.rows[0].value.sum / res.rows[0].value.count, 2) + "/ " + res.rows[0].value.count + " reviews");
 					}).catch(function (err) {
+						pSetRating(0, false);
 					});
 
-					rpd.get(userid + res.rows[0].id).then(function(response) {
-						setRating(response.rating, false);
-					}).catch(function (err) {});
+					
 				}
 			}); 
 		});
