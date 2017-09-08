@@ -144,7 +144,7 @@
     }
 
     function pSetRating(value){
-    	setTimeout(function() {setRating(value, false)}, 1000);
+    	setTimeout(function() {setRating(value, false)}, 500);
     }
 
     function setRating(value, doCallback) {
@@ -617,12 +617,12 @@
 			mouseMove: true,
 			debug: false,					
 			nodeSpring: {           
-				dampingRatio: 0.8,  
+				dampingRatio: 0.9,  
 				period: 1000        
 			}
 		});
 
-		var grid = new HeaderFooterLayout({headerSize: true,footerSize: 30}); 
+		var grid = new HeaderFooterLayout({headerSize: undefined,footerSize: 30}); 
 
 		grid.header.add(_createTitle());
 		grid.content.add(modalscrollview.contentscroll);
