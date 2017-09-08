@@ -82,7 +82,7 @@ html {
 }
 .helpCloseButton{
     text-align : center;
-    padding-top: 37px;
+    padding-top: 45px;
     background: url(../images/cancel.png) no-repeat center top;
     display:block;
 }
