@@ -77,7 +77,7 @@ html {
     -webkit-border-radius: 10px
 }
 
-.closeButton{
+.fa.closeButton{
     position: absolute;
     right: -4px;
     top: -4px;
@@ -95,19 +95,19 @@ html {
 @media only screen 
 and (min-device-width : 414px) 
 and (max-device-width : 736px) { 
-.closeButton{display:none;}
+.fa.closeButton{display:none;}
 }
 
 @media only screen 
 and (min-device-width : 320px) 
 and (max-device-width : 568px) {
-    .closeButton{display:none;}
+.fa.closeButton{display:none;}
 }
 
 @media only screen 
 and (min-device-width : 375px) 
 and (max-device-width : 667px) {
-    .closeButton{display:none;}
+.fa.closeButton{display:none;}
 }
 
 .appModial {
