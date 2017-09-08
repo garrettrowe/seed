@@ -567,7 +567,7 @@
 					
 					rpd.query('rating', {group: true, key: res.rows[0].id }).then(function (res) {
 						currentRating = Math.round(res.rows[0].value.sum / res.rows[0].value.count);
-						rpd.get(userid + res.rows[0].id).then(function(response) {
+						rpd.get(userid + res.rows[0].key).then(function(response) {
 							pSetRating(response.rating, false);
 						}).catch(function (err) {
 							pSetRating(currentRating, false);
