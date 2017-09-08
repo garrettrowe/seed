@@ -560,18 +560,17 @@
 					modal.setContent("<div>" + res.rows[0].doc[i].content + "</div>");
 
 					ratingCountSurface.setContent("0 reviews");
-					currentRating = 0;
+					setRating(0, false);
 
 					rpd.query('rating', {group: true, key: res.rows[0].id }).then(function (res) {
-						currentRating = Math.round(res.rows[0].value.sum / res.rows[0].value.count);
+						setRating(Math.round(res.rows[0].value.sum / res.rows[0].value.count);, false);
 						ratingCountSurface.setContent("" + pround(res.rows[0].value.sum / res.rows[0].value.count, 2) + "/ " + res.rows[0].value.count + " reviews");
 					}).catch(function (err) {
 					});
 
 					rpd.get(userid + res.rows[0].id).then(function(response) {
-						currentRating = response.rating;
+						setRating(response.rating, false);
 					}).catch(function (err) {});
-					setRating(currentRating, false);
 				}
 			}); 
 		});
