@@ -280,6 +280,11 @@ pre {
     float:left;
     height:30px;
 }
+.loadSpinner{
+    color:white;
+    margin-top:100px;
+    text-align:center;
+}
 .titleText{
     color:#f9f9fb;
     max-height: fit-content;

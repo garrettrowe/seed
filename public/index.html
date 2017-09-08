@@ -642,7 +642,7 @@
 	
 	function _createSection() {
 	    modal = new Surface({
-			size: [undefined, 5000],
+			size: [undefined, true],
 			properties:{
 				wordWrap: 'break-word'
 			}
@@ -854,7 +854,7 @@
 			for (var i = 0; i < tab.length; i++){
 				tab[i].push(new Surface({
 					classes: ['loadSpinner'],
-					content: '<i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>'
+					content: '<i class="fa fa-refresh fa-spin fa-4x fa-fw"></i>'
 				}));
 			}
 		}
