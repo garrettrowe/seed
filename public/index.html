@@ -144,7 +144,7 @@
     }
 
     function pSetRating(value){
-    	setTimeout(setRating(value, false), 1000);
+    	setTimeout(function() {setRating(value, false)}, 1000);
     }
 
     function setRating(value, doCallback) {
