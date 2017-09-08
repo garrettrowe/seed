@@ -94,7 +94,7 @@
     function saveStars(rating, docid) {  
 		rpd.get(userid + docid).then(function(doc) {
 		  return rpd.put({
-		    _id: 'mydoc',
+		    _id: doc._id,
 		    _rev: doc._rev,
 		    "time_stamp": new Date(),
 		    "userid" : userid,
@@ -557,7 +557,9 @@
 						ratingCountSurface.setContent("(" + res.rows[0].value.count + ")");
 						setRating();
 					}).catch(function (err) {
-					  // some error
+						ratingCountSurface.setContent("(0)");
+						currentRating = 0;
+						setRating();
 					});
 
 				}
