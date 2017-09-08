@@ -76,6 +76,40 @@ html {
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px
 }
+
+.closeButton{
+    position: absolute;
+    right: -4px;
+    top: -4px;
+    border: 3px solid white;
+    width: 30px;
+    height: 20px;
+    text-align: center;
+    padding-top: 5px;
+    background-color: #152935;
+    border-bottom-left-radius: 10px;
+    -moz-border-bottom-left-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px
+}
+
+@media only screen 
+and (min-device-width : 414px) 
+and (max-device-width : 736px) { 
+.closeButton{display:none;}
+}
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) {
+    .closeButton{display:none;}
+}
+
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px) {
+    .closeButton{display:none;}
+}
+
 .appModial {
                 background-color:#264a60;
                 color:white;

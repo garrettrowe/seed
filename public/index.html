@@ -89,6 +89,9 @@
 	var ratingCount;
     var stars = [];
     var userid = undefined;
+    var saveContent = undefined;
+	var saveTitle = undefined;
+	var saveUser = undefined;
 
     
     function saveStars(rating, docid) {  
@@ -556,8 +559,12 @@
 		pd.allDocs(options,  function(err, res) {	
 			Object.keys(res.rows[0].doc).forEach(function(i) {
 				if (typeof res.rows[0].doc[i] === "object"){
-					modalTitle.setContent("<h3>" + res.rows[0].doc[i].title + "</h3><hr width=92%>" );
+					modalTitle.setContent("<h3>" + res.rows[0].doc[i].title + "</h3><hr width=92%><i class='fa fa-times closeButton' onclick='javascript:closeLightbox();'></i>" );
 					modal.setContent("<div>" + res.rows[0].doc[i].content + "</div>");
+
+					saveTitle = res.rows[0].doc[i].title;
+					saveContent = res.rows[0].doc[i].content;
+					saveUser = res.rows[0].doc[i].userid;
 
 					ratingCountSurface.setContent("0 reviews");
 					
@@ -695,10 +702,15 @@
 	
 	function openModal(e){
 		_pumpDetailContent(e.currentTarget.id);
-		modalscrollview.contentscroll.goToFirstPage();    
-		viewid = e.currentTarget.id;
-		startview = Date.now();
-		lightbox.show(modalscrollview);		
+		if(){
+
+		}
+		else{
+			modalscrollview.contentscroll.goToFirstPage();    
+			viewid = e.currentTarget.id;
+			startview = Date.now();
+			lightbox.show(modalscrollview);		
+		}
 	}
 	
 	function openUsrInput(e){
