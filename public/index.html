@@ -571,7 +571,7 @@
 					rpd.get(userid + res.rows[0].id).then(function(response) {
 						currentRating = response.rating;
 					}).catch(function (err) {});
-					setRating();
+					setRating(currentRating, false);
 				}
 			}); 
 		});
