@@ -554,14 +554,16 @@
 
 					rpd.query('rating', {group: true, key: res.rows[0].id }).then(function (res) {
 						currentRating = Math.round(res.rows[0].value.sum / res.rows[0].value.count);
-						ratingCountSurface.setContent("(" + res.rows[0].value.count + ")");
-						setRating();
+						ratingCountSurface.setContent("(" +res.rows[0].value.sum / res.rows[0].value.count + ", " res.rows[0].value.count + " reviews)");
 					}).catch(function (err) {
-						ratingCountSurface.setContent("(0)");
+						ratingCountSurface.setContent("(0 reviews)");
 						currentRating = 0;
-						setRating();
 					});
 
+					rpd.get(userid + docid).then(function(response) {
+					  currentRating = response.rating;
+					}).catch(function (err) {});
+					setRating();
 				}
 			}); 
 		});
