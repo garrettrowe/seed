@@ -554,7 +554,8 @@
 
 					rpd.query('rating', {group: true, key: res.rows[0].id }).then(function (res) {
 						currentRating = Math.round(res.rows[0].value.sum / res.rows[0].value.count);
-						ratingCountSurface.setContent(es.rows[0].value.count);
+						ratingCountSurface.setContent("(" + res.rows[0].value.count + ")");
+						setRating();
 					}).catch(function (err) {
 					  // some error
 					});
