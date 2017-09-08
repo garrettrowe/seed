@@ -541,6 +541,11 @@
 			_loadTabs(res, pos);
 		});
 	}
+
+	function pround(value, decimals) {
+	  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+	}
+
 	function _pumpDetailContent(id){
 		var options ={
 			include_docs : true,
@@ -554,13 +559,13 @@
 
 					rpd.query('rating', {group: true, key: res.rows[0].id }).then(function (res) {
 						currentRating = Math.round(res.rows[0].value.sum / res.rows[0].value.count);
-						ratingCountSurface.setContent("(" +res.rows[0].value.sum / res.rows[0].value.count + ", " + res.rows[0].value.count + " reviews)");
+						ratingCountSurface.setContent("(" + pround(res.rows[0].value.sum / res.rows[0].value.count, 2) + ", " + res.rows[0].value.count + " reviews)");
 					}).catch(function (err) {
 						ratingCountSurface.setContent("(0 reviews)");
 						currentRating = 0;
 					});
 
-					rpd.get(userid + docid).then(function(response) {
+					rpd.get(userid + res.rows[0].id).then(function(response) {
 					  currentRating = response.rating;
 					}).catch(function (err) {});
 					setRating();
