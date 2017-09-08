@@ -559,9 +559,9 @@
 
 					rpd.query('rating', {group: true, key: res.rows[0].id }).then(function (res) {
 						currentRating = Math.round(res.rows[0].value.sum / res.rows[0].value.count);
-						ratingCountSurface.setContent("(" + pround(res.rows[0].value.sum / res.rows[0].value.count, 2) + ", " + res.rows[0].value.count + " reviews)");
+						ratingCountSurface.setContent("" + pround(res.rows[0].value.sum / res.rows[0].value.count, 2) + "/ " + res.rows[0].value.count + " reviews");
 					}).catch(function (err) {
-						ratingCountSurface.setContent("(0 reviews)");
+						ratingCountSurface.setContent("0 reviews");
 						currentRating = 0;
 					});
 
@@ -679,7 +679,7 @@
 			        stars.push(star);
 		}
 		ratingCountSurface = new Surface({
-			size: [50, 25],
+			size: [100, 25],
 			classes: ['ratingCount']}
 		);
 		stars.push(ratingCountSurface);
