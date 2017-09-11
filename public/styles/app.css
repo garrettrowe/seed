@@ -177,6 +177,9 @@ and (max-device-width : 667px) {
 }
 .appTitle{
     text-align: center;
+    font-family: sans-serif;
+    font-size: large;
+    text-shadow: 3px 3px 1px rgba(0,0,0,0.59);
 }
 .appMargin{
     margin: 0px 0px 0px 0px;
