@@ -30,13 +30,6 @@ var manifest = require('cache-manifest-generator');
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-
-// Cache-Control from cache-manifest-generator docs
-app.use(function(req, res, next) {
-    res.set('Cache-Control', 'no-cache');
-    next();
-});
-
 app.engine('html', require('ejs').renderFile);
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({
